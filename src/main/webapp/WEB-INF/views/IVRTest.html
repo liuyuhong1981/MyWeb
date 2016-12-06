@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="GBK">
+<title>IVRTest</title>
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.0.js"></script>
+</head>
+<body>
+<div>
+<li>111</li>
+<li>222</li>
+<ul>
+	<ul>
+		<li>111</li>
+		<li>222</li>
+	</ul>
+	<ul>
+		<li>111</li>
+		<li>222</li>
+	</ul>
+</ul>
+</div>
+<br />
+	<br /> IVR数据请求测试 <br />
+	<!-- localhost:8080/neocfs-customer-web -->
+	<!-- 10.20.2.22:8080/custweb -->
+	<form action="http://127.0.0.2:8088/custweb/ivr/external_request" method="POST">
+		staffId: <br />
+		<input type="text" id="staffId" name="staffId" value="IVR"  style="width: 500px;"/><br />
+		passwd: <br />
+		<input type="text" id="passwd" name="passwd" value="8344880b1b23e5797198432c47a8dc8c"  style="width: 500px;"/><br />
+		requestMsg: <br />
+		<textarea id="requestMsg" name="requestMsg" rows="12" style="width: 500px;">
+{
+    "TRANSCODE":"ER001",
+    "REQUESTDATE":"2016/03/10 17:42:14",
+    "SESSIONID":"1FD4AD85A174AD0AF9E2F0088309B1EA",
+    "ARRAYDATA": [
+    	{
+           "ZIPCODE":"",
+           "PHONENO":"",
+           "CERTID":"422101197902283518",
+           "WEIXIN":"",
+           "QQ":""
+    	}
+  	]
+}
+        </textarea><br /> <br />
+        <input type="submit" value="提交IVR数据请求测试" />
+	</form>
+	<br />
+	<br />
+	<hr />
+	IVR客户信息页面请求测试<br />
+	<!-- localhost:8080/neocfs-customer-web -->
+	<!-- 10.20.2.22:8080/custweb -->
+	<form action="http://127.0.0.2:8088/custweb/ivr/external_page" method="POST">
+		staffId: <br />
+		<input type="text" id="staffId" name="staffId" value="IVR"  style="width: 500px;"/><br />
+		passwd: <br />
+		<input type="text" id="passwd" name="passwd" value="8344880b1b23e5797198432c47a8dc8c"  style="width: 500px;"/><br />
+		requestMsg: <br />
+		<textarea id="requestMsg" name="requestMsg" rows="12" style="width: 500px;">
+{
+	"TRANSCODE" : "EP001",
+	"REQUESTDATE" : "2016/04/15 10:41:00",
+	"SESSIONID" : "1FD4AD85A174AD0AF9E2F0088309B1EA",
+	"ARRAYDATA" : [ {
+		"CUSTOMERID" : "11113058",
+		"CONTRACTID" : "FP12772016032500000096",
+		"LINETYPE" : "1",
+		"OPERATORID" : "110001"
+    	} ]
+}
+        </textarea><br /> <br />
+		<input type="submit" value="提交IVR客户信息页面请求测试" />
+	</form>
+	<br />
+	<br />
+	<hr />
+	IVR商户信息页面请求测试<br />
+	<!-- localhost:8080/neocfs-customer-web -->
+	<!-- 10.20.2.22:8080/custweb -->
+	<form action="http://127.0.0.2:8088/custweb/ivr/external_page" method="POST">
+		staffId: <br />
+		<input type="text" id="staffId" name="staffId" value="IVR"  style="width: 500px;"/><br />
+		passwd: <br />
+		<input type="text" id="passwd" name="passwd" value="8344880b1b23e5797198432c47a8dc8c"  style="width: 500px;"/><br />
+		requestMsg: <br />
+		<textarea id="requestMsg" name="requestMsg" rows="12" style="width: 500px;">
+{
+	"TRANSCODE" : "EP002",
+	"REQUESTDATE" : "2016/04/15 10:41:00",
+	"SESSIONID" : "1FD4AD85A174AD0AF9E2F0088309B1EA",
+	"ARRAYDATA" : [ {
+		"ID" : "6220005",
+		"LINETYPE" : "1",
+		"OPERATORID" : "admin"
+    	} ]
+}
+        </textarea><br /> <br />
+		<input type="submit" value="提交IVR商户信息页面请求测试" />
+	</form>
+    <script type="text/javascript">
+		$(document).ready(function(){
+			var reg = /^[1-10]([.]\d{1}?)$/;
+			reg = /^[1-9,10](\.\d)?$/;
+			reg = /^([1-9](\.\d)?)|(10)$/;
+			reg = /^(([1-9]([.]\d)?)|(10))$/;
+
+		});
+	</script>
+	
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	银行帐号：<input type='text' value='422233445555333385'/> 开户银行 <select><option>中国银行</option></select> <br />
+	开户行信息：省 <select><option>广东</option></select> 市 <select><option>深圳</option></select> 开户支行 <select><option></option></select> <input type='text' value='中国工商银行深圳支行'/> <br />
+	<input type='button' value='保存' /> <input type='button' value='取消' />
+</body>
+</html>
