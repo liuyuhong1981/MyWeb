@@ -14,6 +14,10 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import java.util.function.Predicate;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Ordering;
+
 /**
  * 
  */
@@ -30,10 +34,10 @@ public class MyTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		lambda4();
+		dateFormat();
 	}
 
-	public static void lambda4() {
+	public static void dateFormat() {
 		Date date = new Date("2016-12-31 00:00:00");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmSS");
 		System.out.println(sdf.format(date));
@@ -406,6 +410,14 @@ class Test {
 class User {
 	String name;
 	int age;
+
+	User(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	User() {
+	}
 
 	public String getName() {
 		return name;
