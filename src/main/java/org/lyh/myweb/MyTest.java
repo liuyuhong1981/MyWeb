@@ -1,8 +1,11 @@
 package org.lyh.myweb;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,9 +17,17 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import java.util.function.Predicate;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Ordering;
+import org.apache.commons.math3.optim.MaxIter;
+import org.apache.commons.math3.optim.PointValuePair;
+import org.apache.commons.math3.optim.linear.LinearConstraint;
+import org.apache.commons.math3.optim.linear.LinearConstraintSet;
+import org.apache.commons.math3.optim.linear.LinearObjectiveFunction;
+import org.apache.commons.math3.optim.linear.NonNegativeConstraint;
+import org.apache.commons.math3.optim.linear.Relationship;
+import org.apache.commons.math3.optim.linear.SimplexSolver;
+import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
+
+import com.google.common.base.Strings;
 
 /**
  * 
@@ -34,7 +45,184 @@ public class MyTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		dateFormat();
+		List<String> list = splitExpression("AA00=AA01 BB00=BB01 CC00=CC01 DD00=DD01 EE00=EE01 FF00=FF01 GG00=GG01 HH00=HH01 II00=II01 JJ00=JJ01", 30);
+		System.out.println(list);
+	}
+
+	private static List<String> splitExpression(String expression, int splitNumber) {
+		List<String> expressionList = new ArrayList<String>();
+		boolean flag = true;
+		int splitNum = splitNumber;
+		if (expression == null || expression.length() <= splitNum) {
+			flag = false;
+			expressionList.add(expression);
+		} else {
+			while (flag) {
+				String splitChar = expression.substring(splitNum - 1, splitNum);
+				if (" ".equals(splitChar)) {
+					String splitPart = expression.substring(0, splitNum);
+					expressionList.add(splitPart.trim());
+					expression = expression.substring(splitNum, expression.length());
+					splitNum = splitNumber;
+					System.out.println(expression);
+				} else {
+					splitNum--;
+				}
+				if (splitNum == 0) {
+					flag = false;
+				}
+				if (expression.length() <= splitNum) {
+					flag = false;
+					expressionList.add(expression);
+				}
+			}
+		}
+
+		return expressionList;
+	}
+
+
+    static void mathTest2() {
+        /**
+         *  描述线性问题，添加方程式
+    	 *  define objective equation
+    	 *  example: z = 160x + 180y + 120z + 0 -> 
+    	 *  LinearObjectiveFunction f = new LinearObjectiveFunction({160, 180, 120}, 0);
+    	 */
+    	double[] objective = {1, 1, 1, 0, 0};// z = x
+        LinearObjectiveFunction f = new LinearObjectiveFunction(objective, 0);
+
+    	/**
+    	 *  添加条件方程式
+    	 *  define constraint equation
+    	 *  example: 2x + 4y + 2z <= 480 -> 
+    	 *  constraints.add(new LinearConstraint(new double[] { 2, 4, 2}, Relationship.LEQ, 480));
+    	 */
+        Collection<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
+        /**
+         * 
+         * 
+         * s = 5x + 3y
+         * 3x + 5y <= 37
+         * x >= 1
+         * y - x >= 1
+         * 
+         * z = 200
+         * x + z = 180
+         * y = 120
+         */
+        constraints.add(new LinearConstraint(new double[] {1, 1, 1, 0, 0}, Relationship.EQ, 100));
+        constraints.add(new LinearConstraint(new double[] {0, 0, 0, 1, 0}, Relationship.EQ, 200));
+        constraints.add(new LinearConstraint(new double[] {1, 1, 0, 0, 0}, Relationship.EQ, 90));
+        constraints.add(new LinearConstraint(new double[] {0, 0, 1, 1, 0}, Relationship.EQ, 210));
+        constraints.add(new LinearConstraint(new double[] {0, 1, 1, 0, 0}, Relationship.EQ, 90));
+
+        /**
+         * 创建并运行solver
+         */
+        PointValuePair solution = null;
+        solution = new SimplexSolver().optimize(f, new LinearConstraintSet(constraints), GoalType.MAXIMIZE);
+
+        /**
+         * 获取结果
+         */
+        if (solution != null) {
+            double max = solution.getValue();
+            System.out.println("Opt: " + max);
+
+            // 结果打印
+            for (int i = 0; i < objective.length; i++) {
+                System.out.print(solution.getPoint()[i] + "\t");
+            }
+        }
+    }
+
+	static void mathTest1() {
+		List<Double> values = Arrays.asList(100d, 50d, 50d);
+		double[][] calMatrix = { { 1, 1, 0 }, { 1, 0, 0 }, { 0, 1, 0 } };
+
+		LinearObjectiveFunction f = new LinearObjectiveFunction(calMatrix[0], 0);
+		Collection<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
+		for (int i = 0; i < values.size(); i++) {
+			double[] entry = calMatrix[i];
+			constraints.add(new LinearConstraint(entry, Relationship.EQ, values.get(i)));
+		}
+		SimplexSolver solver = new SimplexSolver();
+		PointValuePair solution = solver.optimize(new MaxIter(1000), f, new LinearConstraintSet(constraints),
+				GoalType.MAXIMIZE, new NonNegativeConstraint(true));
+		double[] orderCountList = solution.getPoint();
+
+		for (Double num : orderCountList) {
+			System.out.print(num + ", ");
+		}
+	}
+
+	static Map<String, Integer> parseExpressionToOptionAndCount(String expression, Map<String, Integer> keyValues) {
+		if (Strings.isNullOrEmpty(expression)) {
+			return null;
+		}
+
+		if (keyValues == null || keyValues.isEmpty()) {
+			keyValues = new HashMap<String, Integer>();
+		}
+
+		// remove ( & )
+		expression = expression.replaceAll("\\(", "");
+		expression = expression.replaceAll("\\)", "");
+		expression = expression.replaceAll("AND", "@@");
+		expression = expression.replaceAll("&", "@@");
+		expression = expression.replaceAll("OR", "@@");
+		expression = expression.replaceAll("[|]", "@@");
+
+		String[] options = expression.split("@@");
+
+		for (String option : options) {
+			String result = option.replaceAll("\\[[^,]*\\]", "");
+			String[] values = result.split("=");
+
+			if (values.length == 2) {
+				String key = values[1].trim();
+				if (keyValues.containsKey(key)) {
+					keyValues.put(key, keyValues.get(key) + 1);
+				} else {
+					keyValues.put(key, 1);
+				}
+			}
+		}
+		return keyValues;
+	}
+
+	static Map<String, List<String>> parseOptionExpression(String expression) {
+		if (Strings.isNullOrEmpty(expression)) {
+			return null;
+		}
+
+		Map<String, List<String>> keyValues = new HashMap<String, List<String>>();
+
+		// remove ( & )
+		expression = expression.replaceAll("\\(", "");
+		expression = expression.replaceAll("\\)", "");
+		expression = expression.replaceAll("AND", "@@");
+		expression = expression.replaceAll("&", "@@");
+		expression = expression.replaceAll("OR", "@@");
+		expression = expression.replaceAll("[|]", "@@");
+
+		String[] options = expression.split("@@");
+
+		for (String option : options) {
+			String result = option.replaceAll("\\[[^,]*\\]", "");
+			String[] values = result.split("=");
+
+			if (values.length == 2) {
+				String key = values[0].trim();
+				if (keyValues.containsKey(key)) {
+					keyValues.get(key).add(values[1].trim());
+				} else {
+					keyValues.put(values[0].trim(), newArrayList(values[1].trim()));
+				}
+			}
+		}
+		return keyValues;
 	}
 
 	public static void dateFormat() {
