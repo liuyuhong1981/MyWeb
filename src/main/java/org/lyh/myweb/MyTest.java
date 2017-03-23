@@ -1,5 +1,6 @@
 package org.lyh.myweb;
 
+import static com.google.common.collect.FluentIterable.from;
 import static com.google.common.collect.Lists.newArrayList;
 
 import java.text.SimpleDateFormat;
@@ -14,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.function.Predicate;
 
@@ -27,7 +30,10 @@ import org.apache.commons.math3.optim.linear.Relationship;
 import org.apache.commons.math3.optim.linear.SimplexSolver;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicates;
 import com.google.common.base.Strings;
+import com.google.common.collect.FluentIterable;
 
 /**
  * 
@@ -45,11 +51,84 @@ public class MyTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		List<String> list = splitExpression("AA00=AA01 BB00=BB01 CC00=CC01 DD00=DD01 EE00=EE01 FF00=FF01 GG00=GG01 HH00=HH01 II00=II01 JJ00=JJ01", 30);
-		System.out.println(list);
+		testObjectInListAndMap();
+	}
+
+	private static void testObjectInListAndMap() {
+		User user = new User();
+		user.setAge(10);
+		user.setName("aaa");
+		List<User> list = new ArrayList<User>();
+		Map<String, User> map = new HashMap<String, User>();
+		list.add(user);
+		map.put(user.getName(), user);
+
+		map.get("aaa").setAge(11);
+		System.out.println(list.get(0).getAge());
+	}
+
+	private static void testTransformWithNull() {
+		FluentIterable<User> fi = getAvailableOptionValuesByFamilyIntent("", null, new ClassCastFunction<User, User>() {
+            @Override
+            public User build(User rule, User optionValue) {
+            	if (optionValue == null) {
+            		return null;
+            	}
+            	return new User(optionValue.getName(), optionValue.getAge());
+            }
+        });
+
+		List<User> userList =  fi.filter(Predicates.notNull()).toList();
+
+		System.out.println(userList.size());
+		for(User user : userList) {
+			System.out.println(user == null || user.getName() == null ? "null" : user.getName());
+		}
+	}
+
+    private static <T extends User> FluentIterable<T> getAvailableOptionValuesByFamilyIntent(String familyIntent, String type, final ClassCastFunction<T, User> function){
+        final List<User> optionValues = new ArrayList<User>();
+        User u1 = new User();
+        u1.setAge(10);
+        u1.setName("aaa");
+        User u2 = new User();
+        u2.setAge(11);
+        u2.setName("bbb");
+        optionValues.add(u1);
+        optionValues.add(u2);
+
+        List<User> availabilityRules = new ArrayList<User>();
+        availabilityRules.addAll(optionValues);
+        return from(availabilityRules).filter(new com.google.common.base.Predicate<User>() {
+            @Override
+            public boolean apply(User rule) {
+                return rule.getName() != null;
+            }
+        }).transform(new Function<User, T>() {
+            @Override
+            public T apply(User rule) {
+            	if (rule.getAge() == 10) {
+            		return null;
+            	}
+                return function.build(rule, rule);
+            }
+        });
+    }
+
+
+	private static void testThreadPool() {
+		ExecutorService executorService = Executors.newFixedThreadPool(1);
+		Job job = new Job();
+		executorService.execute(job);
+		executorService.execute(job);
+		executorService.execute(job);
+		executorService.execute(job);
+		System.out.println("Add Job complete.");
+		executorService.shutdown();
 	}
 
 	private static List<String> splitExpression(String expression, int splitNumber) {
+		// AA00=AA01 BB00=BB01 CC00=CC01 DD00=DD01 EE00=EE01 FF00=FF01 GG00=GG01 HH00=HH01 II00=II01 JJ00=JJ01
 		List<String> expressionList = new ArrayList<String>();
 		boolean flag = true;
 		int splitNum = splitNumber;
@@ -624,6 +703,17 @@ class User {
 	}
 }
 
+class ChildUser extends User {
+
+	ChildUser(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	ChildUser() {
+	}
+}
+
 class MyThread extends Thread {
 	private int n;
 
@@ -676,4 +766,21 @@ class SortObject implements Comparable<SortObject> {
 	public int compareTo(SortObject o) {
 		return Integer.valueOf(this.age).compareTo(Integer.valueOf(o.getAge()));
 	}
+}
+
+class Job implements Runnable {
+	@Override
+	public void run() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Job running...");
+	}
+}
+
+@SuppressWarnings("hiding")
+interface ClassCastFunction<T, User>{
+    T build(User user, User user2);
 }
