@@ -3,6 +3,7 @@ package org.lyh.myweb;
 import static com.google.common.collect.FluentIterable.from;
 import static com.google.common.collect.Lists.newArrayList;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +13,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -51,7 +53,18 @@ public class MyTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		testObjectInListAndMap();
+
+	}
+
+	private static void testDateTransform() {
+		SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MMM-yyyy HH:mm", Locale.ENGLISH);
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddHHmmss");
+		try {
+			Date date = sdf1.parse("16-Mar-2017 13:48");
+			System.out.println(sdf2.format(date));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void testObjectInListAndMap() {
