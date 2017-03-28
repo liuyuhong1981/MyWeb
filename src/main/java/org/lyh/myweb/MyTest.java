@@ -22,6 +22,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.function.Predicate;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.apache.commons.math3.optim.MaxIter;
 import org.apache.commons.math3.optim.PointValuePair;
 import org.apache.commons.math3.optim.linear.LinearConstraint;
@@ -31,6 +33,7 @@ import org.apache.commons.math3.optim.linear.NonNegativeConstraint;
 import org.apache.commons.math3.optim.linear.Relationship;
 import org.apache.commons.math3.optim.linear.SimplexSolver;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
+import org.lyh.myweb.common.XMLUtil;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
@@ -53,7 +56,24 @@ public class MyTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		testDomParse();
+	}
 
+	private static void testDomParse() {
+		User user = new User();
+		user.setAge(11);
+		user.setName("aaa");
+		String xmlString = XMLUtil.convertToXmlString(user);
+		System.out.println(xmlString);
+
+		xmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\"><user><age>22</age><name>bbb</name></user>";
+		if (xmlString.contains("<?xml")) {
+			int index = xmlString.indexOf(">");
+			xmlString = xmlString.substring(index + 1);
+			System.out.println(xmlString);
+		}
+		User user2 = (User) XMLUtil.convertXmlStrToObject(User.class, xmlString);
+		System.out.println(user2.getAge());
 	}
 
 	private static void testDateTransform() {
@@ -687,6 +707,7 @@ class Test {
 	}
 }
 
+@XmlRootElement
 class User {
 	String name;
 	int age;
