@@ -33,6 +33,7 @@ import org.apache.commons.math3.optim.linear.NonNegativeConstraint;
 import org.apache.commons.math3.optim.linear.Relationship;
 import org.apache.commons.math3.optim.linear.SimplexSolver;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
+import org.lyh.myweb.common.DateUtils;
 import org.lyh.myweb.common.XMLUtil;
 
 import com.google.common.base.Function;
@@ -56,7 +57,35 @@ public class MyTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		testDomParse();
+		testEffectivityParse("2017-03-28");
+	}
+
+	private static void testEffectivityParse(String effectivityString) {
+		String[] effectivity = new String[] { "", "" };
+		try {
+			if (!Strings.isNullOrEmpty(effectivityString)) {
+				effectivityString = effectivityString.trim();
+				effectivityString = effectivityString.replace("[Teamcenter::]", "");
+				effectivityString = effectivityString.replace("Date", "");
+				effectivityString = effectivityString.replace(">=", "");
+				effectivityString = effectivityString.replace("<", "");
+				String[]  effectivityArray = effectivityString.split("&");
+				if (effectivityArray.length > 1) {
+					effectivity[0] = effectivityArray[0];
+					effectivity[1] = effectivityArray[1];
+				} else if (effectivityArray.length == 1) {
+					effectivity[0] = effectivityArray[0];
+					effectivity[1] = "";
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		String effIn = effectivity[0];
+		String effOut = effectivity[1];
+
+		System.out.println("EffIn: " + effIn + ", effOut: " + effOut);
 	}
 
 	private static void testDomParse() {
