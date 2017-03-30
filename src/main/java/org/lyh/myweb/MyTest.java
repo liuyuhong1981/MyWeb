@@ -59,16 +59,18 @@ public class MyTest {
 	 * @param args
 	 * @throws DocumentException 
 	 */
-	public static void main(String[] args) {
-
+	public static void main(String[] args) throws Exception {
+		testReplaceAllForXMLDocument();
 	}
 
-	private static void testReplaceAll() throws DocumentException {
+	private static void testReplaceAllForXMLDocument() throws Exception {
 		String xmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ExpressionSplit><ExpressionList>CB00 = CB01 &amp; BD00 = BD03</ExpressionList></ExpressionSplit>";
 		xmlString = xmlString.replaceAll("&amp;", "&");
 		xmlString = xmlString.replaceAll("<ExpressionList>", "<![CDATA[");
 		xmlString = xmlString.replaceAll("</ExpressionList>", "]]>");
+		System.out.println(xmlString);
 		Document document = DocumentHelper.parseText(xmlString);
+		xmlString = document.asXML();
 		System.out.println(xmlString);
 	}
 
