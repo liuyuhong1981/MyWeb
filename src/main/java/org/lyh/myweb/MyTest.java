@@ -33,7 +33,6 @@ import org.apache.commons.math3.optim.linear.NonNegativeConstraint;
 import org.apache.commons.math3.optim.linear.Relationship;
 import org.apache.commons.math3.optim.linear.SimplexSolver;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
-import org.lyh.myweb.common.DateUtils;
 import org.lyh.myweb.common.XMLUtil;
 
 import com.google.common.base.Function;
@@ -57,7 +56,16 @@ public class MyTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		testEffectivityParse("2017-03-28");
+		testRuleParse();
+	}
+
+	private static void testRuleParse() {
+		String expression = "([GD_1]BL00 = BL04 | [GD_1]BL00 = BL03) & ([GD_1]AA00 = AA04 | [GD_1]AA00 = AA09) & [GD_1]BF00 = BF01 & ([GD_1]BH00 = BH02 | [GD_1]BH00 = BH01 | [GD_1]BH00 = BH10 | [GD_1]BH00 = BH09 | [GD_1]BH00 = BH12 | [GD_1]BH00 = BH11 | [GD_1]BH00 = BH03 | [GD_1]BH00 = BH05 | [GD_1]BH00 = BH07 | [GD_1]BH00 = BH06) & [GD_1]BC00 = BC01 & [GD_1]DC00 = DC01";
+		expression = expression.replaceAll("\\(", "");
+		expression = expression.replaceAll("\\)", "");
+		expression = expression.replaceAll("\\[GD_1\\]", "");
+
+		System.out.println(expression);
 	}
 
 	private static void testEffectivityParse(String effectivityString) {
