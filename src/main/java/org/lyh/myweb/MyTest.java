@@ -33,6 +33,9 @@ import org.apache.commons.math3.optim.linear.NonNegativeConstraint;
 import org.apache.commons.math3.optim.linear.Relationship;
 import org.apache.commons.math3.optim.linear.SimplexSolver;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
 import org.lyh.myweb.common.XMLUtil;
 
 import com.google.common.base.Function;
@@ -54,9 +57,19 @@ public class MyTest {
 
 	/**
 	 * @param args
+	 * @throws DocumentException 
 	 */
 	public static void main(String[] args) {
-		testRuleParse();
+
+	}
+
+	private static void testReplaceAll() throws DocumentException {
+		String xmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ExpressionSplit><ExpressionList>CB00 = CB01 &amp; BD00 = BD03</ExpressionList></ExpressionSplit>";
+		xmlString = xmlString.replaceAll("&amp;", "&");
+		xmlString = xmlString.replaceAll("<ExpressionList>", "<![CDATA[");
+		xmlString = xmlString.replaceAll("</ExpressionList>", "]]>");
+		Document document = DocumentHelper.parseText(xmlString);
+		System.out.println(xmlString);
 	}
 
 	private static void testRuleParse() {
