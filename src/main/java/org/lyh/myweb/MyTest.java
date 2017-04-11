@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -57,10 +58,40 @@ public class MyTest {
 
 	/**
 	 * @param args
-	 * @throws DocumentException 
+	 * @throws DocumentException
 	 */
 	public static void main(String[] args) throws Exception {
-		testReplaceAllForXMLDocument();
+		testCalendar();
+	}
+
+	public static void testCalendar() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Calendar cal = Calendar.getInstance();
+		cal.set(2017, 3, 4, 0, 0, 0);
+		System.out.println(sdf.format(cal.getTime()));
+
+		cal.add(Calendar.DAY_OF_YEAR, 1);
+		System.out.println(sdf.format(cal.getTime()));
+
+		System.out.println(cal.getTime());
+		System.out.println(cal.getTime().getDay());
+
+		while (true) {
+			if (cal.getTime().getDay() == 1) {
+				break;
+			} else {
+				System.out.println(cal.getTime() + " not Mondy, day + 1");
+				cal.add(Calendar.DAY_OF_YEAR, 1);
+			}
+		}
+
+		System.out.println("Found Monday, " + cal.getTime());
+
+		for (int i=0; i<7; i++) {
+			System.out.println("Day " + (i+1) + " begin " + sdf.format(cal.getTime()));
+			cal.add(Calendar.DAY_OF_YEAR,  1);
+			System.out.println("Day " + (i+1) + " end " + sdf.format(cal.getTime()));
+		}
 	}
 
 	private static void testReplaceAllForXMLDocument() throws Exception {
@@ -92,7 +123,7 @@ public class MyTest {
 				effectivityString = effectivityString.replace("Date", "");
 				effectivityString = effectivityString.replace(">=", "");
 				effectivityString = effectivityString.replace("<", "");
-				String[]  effectivityArray = effectivityString.split("&");
+				String[] effectivityArray = effectivityString.split("&");
 				if (effectivityArray.length > 1) {
 					effectivity[0] = effectivityArray[0];
 					effectivity[1] = effectivityArray[1];
@@ -154,52 +185,52 @@ public class MyTest {
 
 	private static void testTransformWithNull() {
 		FluentIterable<User> fi = getAvailableOptionValuesByFamilyIntent("", null, new ClassCastFunction<User, User>() {
-            @Override
-            public User build(User rule, User optionValue) {
-            	if (optionValue == null) {
-            		return null;
-            	}
-            	return new User(optionValue.getName(), optionValue.getAge());
-            }
-        });
+			@Override
+			public User build(User rule, User optionValue) {
+				if (optionValue == null) {
+					return null;
+				}
+				return new User(optionValue.getName(), optionValue.getAge());
+			}
+		});
 
-		List<User> userList =  fi.filter(Predicates.notNull()).toList();
+		List<User> userList = fi.filter(Predicates.notNull()).toList();
 
 		System.out.println(userList.size());
-		for(User user : userList) {
+		for (User user : userList) {
 			System.out.println(user == null || user.getName() == null ? "null" : user.getName());
 		}
 	}
 
-    private static <T extends User> FluentIterable<T> getAvailableOptionValuesByFamilyIntent(String familyIntent, String type, final ClassCastFunction<T, User> function){
-        final List<User> optionValues = new ArrayList<User>();
-        User u1 = new User();
-        u1.setAge(10);
-        u1.setName("aaa");
-        User u2 = new User();
-        u2.setAge(11);
-        u2.setName("bbb");
-        optionValues.add(u1);
-        optionValues.add(u2);
+	private static <T extends User> FluentIterable<T> getAvailableOptionValuesByFamilyIntent(String familyIntent,
+			String type, final ClassCastFunction<T, User> function) {
+		final List<User> optionValues = new ArrayList<User>();
+		User u1 = new User();
+		u1.setAge(10);
+		u1.setName("aaa");
+		User u2 = new User();
+		u2.setAge(11);
+		u2.setName("bbb");
+		optionValues.add(u1);
+		optionValues.add(u2);
 
-        List<User> availabilityRules = new ArrayList<User>();
-        availabilityRules.addAll(optionValues);
-        return from(availabilityRules).filter(new com.google.common.base.Predicate<User>() {
-            @Override
-            public boolean apply(User rule) {
-                return rule.getName() != null;
-            }
-        }).transform(new Function<User, T>() {
-            @Override
-            public T apply(User rule) {
-            	if (rule.getAge() == 10) {
-            		return null;
-            	}
-                return function.build(rule, rule);
-            }
-        });
-    }
-
+		List<User> availabilityRules = new ArrayList<User>();
+		availabilityRules.addAll(optionValues);
+		return from(availabilityRules).filter(new com.google.common.base.Predicate<User>() {
+			@Override
+			public boolean apply(User rule) {
+				return rule.getName() != null;
+			}
+		}).transform(new Function<User, T>() {
+			@Override
+			public T apply(User rule) {
+				if (rule.getAge() == 10) {
+					return null;
+				}
+				return function.build(rule, rule);
+			}
+		});
+	}
 
 	private static void testThreadPool() {
 		ExecutorService executorService = Executors.newFixedThreadPool(1);
@@ -213,7 +244,8 @@ public class MyTest {
 	}
 
 	private static List<String> splitExpression(String expression, int splitNumber) {
-		// AA00=AA01 BB00=BB01 CC00=CC01 DD00=DD01 EE00=EE01 FF00=FF01 GG00=GG01 HH00=HH01 II00=II01 JJ00=JJ01
+		// AA00=AA01 BB00=BB01 CC00=CC01 DD00=DD01 EE00=EE01 FF00=FF01 GG00=GG01
+		// HH00=HH01 II00=II01 JJ00=JJ01
 		List<String> expressionList = new ArrayList<String>();
 		boolean flag = true;
 		int splitNum = splitNumber;
@@ -245,61 +277,53 @@ public class MyTest {
 		return expressionList;
 	}
 
+	static void mathTest2() {
+		/**
+		 * 描述线性问题，添加方程式 define objective equation example: z = 160x + 180y +
+		 * 120z + 0 -> LinearObjectiveFunction f = new
+		 * LinearObjectiveFunction({160, 180, 120}, 0);
+		 */
+		double[] objective = { 1, 1, 1, 0, 0 };// z = x
+		LinearObjectiveFunction f = new LinearObjectiveFunction(objective, 0);
 
-    static void mathTest2() {
-        /**
-         *  描述线性问题，添加方程式
-    	 *  define objective equation
-    	 *  example: z = 160x + 180y + 120z + 0 -> 
-    	 *  LinearObjectiveFunction f = new LinearObjectiveFunction({160, 180, 120}, 0);
-    	 */
-    	double[] objective = {1, 1, 1, 0, 0};// z = x
-        LinearObjectiveFunction f = new LinearObjectiveFunction(objective, 0);
+		/**
+		 * 添加条件方程式 define constraint equation example: 2x + 4y + 2z <= 480 ->
+		 * constraints.add(new LinearConstraint(new double[] { 2, 4, 2},
+		 * Relationship.LEQ, 480));
+		 */
+		Collection<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
+		/**
+		 * 
+		 * 
+		 * s = 5x + 3y 3x + 5y <= 37 x >= 1 y - x >= 1
+		 * 
+		 * z = 200 x + z = 180 y = 120
+		 */
+		constraints.add(new LinearConstraint(new double[] { 1, 1, 1, 0, 0 }, Relationship.EQ, 100));
+		constraints.add(new LinearConstraint(new double[] { 0, 0, 0, 1, 0 }, Relationship.EQ, 200));
+		constraints.add(new LinearConstraint(new double[] { 1, 1, 0, 0, 0 }, Relationship.EQ, 90));
+		constraints.add(new LinearConstraint(new double[] { 0, 0, 1, 1, 0 }, Relationship.EQ, 210));
+		constraints.add(new LinearConstraint(new double[] { 0, 1, 1, 0, 0 }, Relationship.EQ, 90));
 
-    	/**
-    	 *  添加条件方程式
-    	 *  define constraint equation
-    	 *  example: 2x + 4y + 2z <= 480 -> 
-    	 *  constraints.add(new LinearConstraint(new double[] { 2, 4, 2}, Relationship.LEQ, 480));
-    	 */
-        Collection<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
-        /**
-         * 
-         * 
-         * s = 5x + 3y
-         * 3x + 5y <= 37
-         * x >= 1
-         * y - x >= 1
-         * 
-         * z = 200
-         * x + z = 180
-         * y = 120
-         */
-        constraints.add(new LinearConstraint(new double[] {1, 1, 1, 0, 0}, Relationship.EQ, 100));
-        constraints.add(new LinearConstraint(new double[] {0, 0, 0, 1, 0}, Relationship.EQ, 200));
-        constraints.add(new LinearConstraint(new double[] {1, 1, 0, 0, 0}, Relationship.EQ, 90));
-        constraints.add(new LinearConstraint(new double[] {0, 0, 1, 1, 0}, Relationship.EQ, 210));
-        constraints.add(new LinearConstraint(new double[] {0, 1, 1, 0, 0}, Relationship.EQ, 90));
+		/**
+		 * 创建并运行solver
+		 */
+		PointValuePair solution = null;
+		solution = new SimplexSolver().optimize(f, new LinearConstraintSet(constraints), GoalType.MAXIMIZE);
 
-        /**
-         * 创建并运行solver
-         */
-        PointValuePair solution = null;
-        solution = new SimplexSolver().optimize(f, new LinearConstraintSet(constraints), GoalType.MAXIMIZE);
+		/**
+		 * 获取结果
+		 */
+		if (solution != null) {
+			double max = solution.getValue();
+			System.out.println("Opt: " + max);
 
-        /**
-         * 获取结果
-         */
-        if (solution != null) {
-            double max = solution.getValue();
-            System.out.println("Opt: " + max);
-
-            // 结果打印
-            for (int i = 0; i < objective.length; i++) {
-                System.out.print(solution.getPoint()[i] + "\t");
-            }
-        }
-    }
+			// 结果打印
+			for (int i = 0; i < objective.length; i++) {
+				System.out.print(solution.getPoint()[i] + "\t");
+			}
+		}
+	}
 
 	static void mathTest1() {
 		List<Double> values = Arrays.asList(100d, 50d, 50d);
@@ -679,23 +703,12 @@ public class MyTest {
 	}
 
 	public static void testMathMethod() {
-		// double totalRatio = 0;
-		// int count = 1000;
-		// double basicCountTemp = count / totalRatio;
-		// int basicCount = (int) Math.floor(basicCountTemp);
-		//
-		// System.out.println(basicCount);
-	}
+		double totalRatio = 0;
+		int count = 1000;
+		double basicCountTemp = count / totalRatio;
+		int basicCount = (int) Math.floor(basicCountTemp);
 
-	public void testCalendar() {
-		// Calendar cal = Calendar.getInstance();
-		// cal.set(2016, 5, 6);
-		// System.out.println(cal.getTime());
-		// cal.add(Calendar.DAY_OF_YEAR, 128);
-		// System.out.println(cal.getTime());
-
-		// int[] A = new int[]{-1,1};
-		// System.out.println(testDemo(A));
+		System.out.println(basicCount);
 	}
 
 	public static int testDemo(int[] A) {
@@ -867,6 +880,6 @@ class Job implements Runnable {
 }
 
 @SuppressWarnings("hiding")
-interface ClassCastFunction<T, User>{
-    T build(User user, User user2);
+interface ClassCastFunction<T, User> {
+	T build(User user, User user2);
 }
