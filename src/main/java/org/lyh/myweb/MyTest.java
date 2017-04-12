@@ -37,6 +37,7 @@ import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 import org.lyh.myweb.common.XMLUtil;
 
 import com.google.common.base.Function;
@@ -61,7 +62,20 @@ public class MyTest {
 	 * @throws DocumentException
 	 */
 	public static void main(String[] args) throws Exception {
-		testCalendar();
+		testReadDocumentFromXML();
+	}
+
+	public static void testReadDocumentFromXML() {
+		Document doc = XMLUtil.readDocumentFromFile("c:\\Temp\\Result44.xml");
+		Element root = doc.getRootElement();
+		Element context = root.element("Body").element("PNO18Solve").element("SolveResult").element("Context");
+		List<Element> list = context.elements("PNO18");
+		for (Element element : list) {
+			System.out.println("--------------------------------------");
+			System.out.println(element.elementText("ID"));
+			System.out.println(element.elementText("SolveDate"));
+			System.out.println(element.elementText("OptionString"));
+		}
 	}
 
 	public static void testCalendar() {
