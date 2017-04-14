@@ -38,12 +38,15 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.lyh.myweb.common.DateUtils;
 import org.lyh.myweb.common.XMLUtil;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
 import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ImmutableList;
 
 /**
  * 
@@ -62,7 +65,125 @@ public class MyTest {
 	 * @throws DocumentException
 	 */
 	public static void main(String[] args) throws Exception {
-		testReadDocumentFromXML();
+		filterBaseModelAndPNOElement("(([GD_1]XF00 != XF02 &amp; [GD_1]XH00 = '' &amp; [GD_1]DA00 = DA01 &amp; [GD_1]BM00 = BM01 &amp; [GD_1]AS00 = AS01 &amp; [GD_1]LZ00 = LZ01 &amp; [GD_1]NP00 = NP01 &amp; [GD_1]DW00 = DW02 &amp; [GD_1]08-08 = 0 &amp; [GD_1]BF00 = BF01 &amp; [GD_1]PG00 = PG01 &amp; [GD_1]GG00 = GG22))");
+	}
+
+	public static void filterBaseModelAndPNOElement(String fullString) {
+		fullString = fullString.replace("(", "");
+		fullString = fullString.replace(")", "");
+		fullString = fullString.replace("&amp;", "&");
+
+		String[] options = fullString.split("&");
+		final List<String> optionLists = new ArrayList<String>();
+		for (String option : options) {
+			option = option.replaceAll("\\[[^,]*\\]", "");
+			if ((!option.contains("_BASE_MODEL")) && (!option.contains("\'\'")))
+				optionLists.add(option);
+		}
+
+		final List<String> filterFamilys = newArrayList(
+				Arrays.asList("01-03", "04-05", "06-07", "08-08", "09-09", "10-10", "11-12", "13-15", "16-18"));
+		List<String> resultLists = new ArrayList<String>();
+		for (String optionList : optionLists) {
+			if (!filterFamilys.contains((optionList.substring(0, optionList.indexOf("=") - 1).trim()))) {
+				resultLists.add(optionList);
+			}
+		}
+		System.out.println(Joiner.on("&").join(resultLists));
+	}
+
+    public static String[] getPNO18Effectivity(String effectivityString){
+    	String[] dates = null;
+        try {
+            if (!Strings.isNullOrEmpty(effectivityString)){
+            	String[] dateRange = null;
+            	if (effectivityString.contains(". ")) { 
+            		dateRange = effectivityString.split(". ");
+            	} else {
+            		dateRange = new String[] {effectivityString};
+            	}
+                if (dateRange.length >= 1){
+                	if(dateRange[0].contains("Date=")) {
+                        dates =  dateRange[0].substring(5).split("[.][.]");
+                	} else {
+                        dates =  dateRange[0].split("[.][.]");
+                	}
+                    for(int i =0; i< dates.length;i++)
+                    {
+                        if(dates[i].contains("T")){
+                            dates[i] = dates[i].substring(0,dates[i].indexOf('T'));
+                        }
+                    }
+                    if (dates.length >= 2){
+                        if (dates[1].equalsIgnoreCase("UP")
+                                || dates[1].equalsIgnoreCase("SO")
+                                || dates[1].trim().equalsIgnoreCase("")){
+                            dates[1] = "9999-12-31";
+                        }
+                    }else if(dates.length == 1){
+                        dates = new String[]{dates[0], "9999-12-31"};
+                    }
+                }
+
+                dates[0] = Strings.isNullOrEmpty(dates[0]) ? "" : DateUtils.transform(dates[0], "yyyy-MM-dd", "yyyyMMddHHmmss");
+                dates[1] = Strings.isNullOrEmpty(dates[1]) ? "" : DateUtils.transform(dates[1], "yyyy-MM-dd", "yyyyMMddHHmmss");
+            }
+        }catch (Exception e){
+        	e.printStackTrace();
+        }
+
+        if (dates == null) {
+        	dates = new String[]{"",""};
+        }
+        System.out.println(dates[0]);
+        System.out.println(dates[1]);
+        return dates;
+    }
+
+	private static void testThreadPool() {
+		ExecutorService executorService = Executors.newFixedThreadPool(1);
+		Job job = new Job();
+		executorService.execute(job);
+		executorService.execute(job);
+		executorService.execute(job);
+		executorService.execute(job);
+		executorService.shutdown();
+		while (true) {
+			if (executorService.isTerminated()) {
+				System.out.println("Add Job complete.");
+				break;
+			}
+		}
+	}
+
+	private static void parseFullConfiguration() {
+		String fullConfiguration = "(([GD_1]MA00 = MA10 &amp; [GD_1]AE00 != AE03 | [GD_1]MD00 = MD01))";
+		fullConfiguration = fullConfiguration.replace("(", "");
+		fullConfiguration = fullConfiguration.replace(")", "");
+		fullConfiguration = fullConfiguration.replace("&amp;", "&");
+		fullConfiguration = fullConfiguration.replace(" = ", "=");
+		fullConfiguration = fullConfiguration.replace(" != ", "!=");
+		
+		System.out.println(fullConfiguration);
+
+		String[] items = fullConfiguration.split(" ");
+		for (int i = 0; i < items.length; i++) {
+			String item = items[i];
+			if (item.contains("!=")) {
+				items[i] = "";
+				items[i - 1] = "";
+			}
+		}
+
+		String config = "";
+		for (String item : items) {
+			config += item;
+		}
+
+		config = config.replace("=", " = ");
+		config = config.replace("&", " & ");
+		config = config.replace("|", " | ");
+		System.out.println(config);
 	}
 
 	public static void testReadDocumentFromXML() {
@@ -244,17 +365,6 @@ public class MyTest {
 				return function.build(rule, rule);
 			}
 		});
-	}
-
-	private static void testThreadPool() {
-		ExecutorService executorService = Executors.newFixedThreadPool(1);
-		Job job = new Job();
-		executorService.execute(job);
-		executorService.execute(job);
-		executorService.execute(job);
-		executorService.execute(job);
-		System.out.println("Add Job complete.");
-		executorService.shutdown();
 	}
 
 	private static List<String> splitExpression(String expression, int splitNumber) {
@@ -885,7 +995,7 @@ class Job implements Runnable {
 	@Override
 	public void run() {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
