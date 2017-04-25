@@ -46,7 +46,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
 import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ImmutableList;
 
 /**
  * 
@@ -65,31 +64,9 @@ public class MyTest {
 	 * @throws DocumentException
 	 */
 	public static void main(String[] args) throws Exception {
-		filterBaseModelAndPNOElement("(([GD_1]XF00 != XF02 &amp; [GD_1]XH00 = '' &amp; [GD_1]DA00 = DA01 &amp; [GD_1]BM00 = BM01 &amp; [GD_1]AS00 = AS01 &amp; [GD_1]LZ00 = LZ01 &amp; [GD_1]NP00 = NP01 &amp; [GD_1]DW00 = DW02 &amp; [GD_1]08-08 = 0 &amp; [GD_1]BF00 = BF01 &amp; [GD_1]PG00 = PG01 &amp; [GD_1]GG00 = GG22))");
-	}
-
-	public static void filterBaseModelAndPNOElement(String fullString) {
-		fullString = fullString.replace("(", "");
-		fullString = fullString.replace(")", "");
-		fullString = fullString.replace("&amp;", "&");
-
-		String[] options = fullString.split("&");
-		final List<String> optionLists = new ArrayList<String>();
-		for (String option : options) {
-			option = option.replaceAll("\\[[^,]*\\]", "");
-			if ((!option.contains("_BASE_MODEL")) && (!option.contains("\'\'")))
-				optionLists.add(option);
-		}
-
-		final List<String> filterFamilys = newArrayList(
-				Arrays.asList("01-03", "04-05", "06-07", "08-08", "09-09", "10-10", "11-12", "13-15", "16-18"));
-		List<String> resultLists = new ArrayList<String>();
-		for (String optionList : optionLists) {
-			if (!filterFamilys.contains((optionList.substring(0, optionList.indexOf("=") - 1).trim()))) {
-				resultLists.add(optionList);
-			}
-		}
-		System.out.println(Joiner.on("&").join(resultLists));
+		String[] strArray = getPNO18Effectivity("2015-01-01..9999-12-31");
+		System.out.println(strArray[0]);
+		System.out.println(strArray[1]);
 	}
 
     public static String[] getPNO18Effectivity(String effectivityString){
@@ -135,10 +112,47 @@ public class MyTest {
         if (dates == null) {
         	dates = new String[]{"",""};
         }
-        System.out.println(dates[0]);
-        System.out.println(dates[1]);
         return dates;
     }
+
+	public static void filterBaseModelAndPNOElement(String fullString) {
+		fullString = fullString.replace("(", "");
+		fullString = fullString.replace(")", "");
+		fullString = fullString.replace("&amp;", "&");
+
+		String[] options = fullString.split("&");
+		final List<String> optionLists = new ArrayList<String>();
+		for (String option : options) {
+			option = option.replaceAll("\\[[^,]*\\]", "");
+			if ((!option.contains("_BASE_MODEL")) && (!option.contains("\'\'")))
+				optionLists.add(option);
+		}
+
+		final List<String> filterFamilys = newArrayList(
+				Arrays.asList("01-03", "04-05", "06-07", "08-08", "09-09", "10-10", "11-12", "13-15", "16-18"));
+		List<String> resultLists = new ArrayList<String>();
+		for (String optionList : optionLists) {
+			if (!filterFamilys.contains((optionList.substring(0, optionList.indexOf("=") - 1).trim()))) {
+				resultLists.add(optionList);
+			}
+		}
+		String result = Joiner.on("&").join(resultLists);
+		System.out.println(result);
+		System.out.println(spiltOptionString(result, new ArrayList<String>()));
+	}
+
+	public static List<String> spiltOptionString(String optionString, List<String> optionStringList) {
+		if ((optionString != null) && (optionString.length() > 50)) {
+			String tempString = optionString.substring(0, 50);
+			int tempPosition = tempString.lastIndexOf("&") + 1;
+			optionStringList.add(optionString.substring(0, tempPosition));
+			optionString = optionString.substring(tempPosition, optionString.length());
+			spiltOptionString(optionString, optionStringList);
+		} else {
+			optionStringList.add(optionString);
+		}
+		return optionStringList;
+	}
 
 	private static void testThreadPool() {
 		ExecutorService executorService = Executors.newFixedThreadPool(1);
@@ -157,7 +171,7 @@ public class MyTest {
 	}
 
 	private static void parseFullConfiguration() {
-		String fullConfiguration = "(([GD_1]MA00 = MA10 &amp; [GD_1]AE00 != AE03 | [GD_1]MD00 = MD01))";
+		String fullConfiguration = "(([GD_1]MA00 = MA10 &amp; [GD_1]AE00 != AE03 | [GD_1]MD00 = MD01 | [GD_1]ME00 = ME01))";
 		fullConfiguration = fullConfiguration.replace("(", "");
 		fullConfiguration = fullConfiguration.replace(")", "");
 		fullConfiguration = fullConfiguration.replace("&amp;", "&");
@@ -241,11 +255,11 @@ public class MyTest {
 	}
 
 	private static void testRuleParse() {
-		String expression = "([GD_1]BL00 = BL04 | [GD_1]BL00 = BL03) & ([GD_1]AA00 = AA04 | [GD_1]AA00 = AA09) & [GD_1]BF00 = BF01 & ([GD_1]BH00 = BH02 | [GD_1]BH00 = BH01 | [GD_1]BH00 = BH10 | [GD_1]BH00 = BH09 | [GD_1]BH00 = BH12 | [GD_1]BH00 = BH11 | [GD_1]BH00 = BH03 | [GD_1]BH00 = BH05 | [GD_1]BH00 = BH07 | [GD_1]BH00 = BH06) & [GD_1]BC00 = BC01 & [GD_1]DC00 = DC01";
+		String expression = "(([GD_1]MA00 = MA10 &amp; [GD_1]AE00 != AE03 | [GD_1]MD00 = MD01 | [GD_1]ME00 = ME01))";
+		expression = expression.replaceAll("&amp;", "&");
+		expression = expression.replaceAll("\\[GD_1\\]", "");
 		expression = expression.replaceAll("\\(", "");
 		expression = expression.replaceAll("\\)", "");
-		expression = expression.replaceAll("\\[GD_1\\]", "");
-
 		System.out.println(expression);
 	}
 
