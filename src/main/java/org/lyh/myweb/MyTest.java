@@ -64,56 +64,55 @@ public class MyTest {
 	 * @throws DocumentException
 	 */
 	public static void main(String[] args) throws Exception {
-		String[] strArray = getPNO18Effectivity("2015-01-01..9999-12-31");
-		System.out.println(strArray[0]);
-		System.out.println(strArray[1]);
+		testThreadPool();
 	}
 
-    public static String[] getPNO18Effectivity(String effectivityString){
-    	String[] dates = null;
-        try {
-            if (!Strings.isNullOrEmpty(effectivityString)){
-            	String[] dateRange = null;
-            	if (effectivityString.contains(". ")) { 
-            		dateRange = effectivityString.split(". ");
-            	} else {
-            		dateRange = new String[] {effectivityString};
-            	}
-                if (dateRange.length >= 1){
-                	if(dateRange[0].contains("Date=")) {
-                        dates =  dateRange[0].substring(5).split("[.][.]");
-                	} else {
-                        dates =  dateRange[0].split("[.][.]");
-                	}
-                    for(int i =0; i< dates.length;i++)
-                    {
-                        if(dates[i].contains("T")){
-                            dates[i] = dates[i].substring(0,dates[i].indexOf('T'));
-                        }
-                    }
-                    if (dates.length >= 2){
-                        if (dates[1].equalsIgnoreCase("UP")
-                                || dates[1].equalsIgnoreCase("SO")
-                                || dates[1].trim().equalsIgnoreCase("")){
-                            dates[1] = "9999-12-31";
-                        }
-                    }else if(dates.length == 1){
-                        dates = new String[]{dates[0], "9999-12-31"};
-                    }
-                }
+	public static String[] getPNO18Effectivity() {
+		String effectivityString = "2015-01-01..9999-12-31";
+		String[] dates = null;
+		try {
+			if (!Strings.isNullOrEmpty(effectivityString)) {
+				String[] dateRange = null;
+				if (effectivityString.contains(". ")) {
+					dateRange = effectivityString.split(". ");
+				} else {
+					dateRange = new String[] { effectivityString };
+				}
+				if (dateRange.length >= 1) {
+					if (dateRange[0].contains("Date=")) {
+						dates = dateRange[0].substring(5).split("[.][.]");
+					} else {
+						dates = dateRange[0].split("[.][.]");
+					}
+					for (int i = 0; i < dates.length; i++) {
+						if (dates[i].contains("T")) {
+							dates[i] = dates[i].substring(0, dates[i].indexOf('T'));
+						}
+					}
+					if (dates.length >= 2) {
+						if (dates[1].equalsIgnoreCase("UP") || dates[1].equalsIgnoreCase("SO")
+								|| dates[1].trim().equalsIgnoreCase("")) {
+							dates[1] = "9999-12-31";
+						}
+					} else if (dates.length == 1) {
+						dates = new String[] { dates[0], "9999-12-31" };
+					}
+				}
 
-                dates[0] = Strings.isNullOrEmpty(dates[0]) ? "" : DateUtils.transform(dates[0], "yyyy-MM-dd", "yyyyMMddHHmmss");
-                dates[1] = Strings.isNullOrEmpty(dates[1]) ? "" : DateUtils.transform(dates[1], "yyyy-MM-dd", "yyyyMMddHHmmss");
-            }
-        }catch (Exception e){
-        	e.printStackTrace();
-        }
+				dates[0] = Strings.isNullOrEmpty(dates[0]) ? ""
+						: DateUtils.transform(dates[0], "yyyy-MM-dd", "yyyyMMddHHmmss");
+				dates[1] = Strings.isNullOrEmpty(dates[1]) ? ""
+						: DateUtils.transform(dates[1], "yyyy-MM-dd", "yyyyMMddHHmmss");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-        if (dates == null) {
-        	dates = new String[]{"",""};
-        }
-        return dates;
-    }
+		if (dates == null) {
+			dates = new String[] { "", "" };
+		}
+		return dates;
+	}
 
 	public static void filterBaseModelAndPNOElement(String fullString) {
 		fullString = fullString.replace("(", "");
@@ -154,8 +153,9 @@ public class MyTest {
 		return optionStringList;
 	}
 
-	private static void testThreadPool() {
-		ExecutorService executorService = Executors.newFixedThreadPool(1);
+	private static void testThreadPool() throws InterruptedException {
+		System.out.println("Add non-sync Job.");
+		ExecutorService executorService = Executors.newFixedThreadPool(4);
 		Job job = new Job();
 		executorService.execute(job);
 		executorService.execute(job);
@@ -164,7 +164,22 @@ public class MyTest {
 		executorService.shutdown();
 		while (true) {
 			if (executorService.isTerminated()) {
-				System.out.println("Add Job complete.");
+				System.out.println("Non-sync Job complete.");
+				break;
+			}
+		}
+
+		System.out.println("Add sync Job.");
+		executorService = Executors.newFixedThreadPool(4);
+		JobSync jobSync = new JobSync();
+		executorService.execute(jobSync);
+		executorService.execute(jobSync);
+		executorService.execute(jobSync);
+		executorService.execute(jobSync);
+		executorService.shutdown();
+		while (true) {
+			if (executorService.isTerminated()) {
+				System.out.println("Sync Job complete.");
 				break;
 			}
 		}
@@ -177,7 +192,7 @@ public class MyTest {
 		fullConfiguration = fullConfiguration.replace("&amp;", "&");
 		fullConfiguration = fullConfiguration.replace(" = ", "=");
 		fullConfiguration = fullConfiguration.replace(" != ", "!=");
-		
+
 		System.out.println(fullConfiguration);
 
 		String[] items = fullConfiguration.split(" ");
@@ -236,10 +251,10 @@ public class MyTest {
 
 		System.out.println("Found Monday, " + cal.getTime());
 
-		for (int i=0; i<7; i++) {
-			System.out.println("Day " + (i+1) + " begin " + sdf.format(cal.getTime()));
-			cal.add(Calendar.DAY_OF_YEAR,  1);
-			System.out.println("Day " + (i+1) + " end " + sdf.format(cal.getTime()));
+		for (int i = 0; i < 7; i++) {
+			System.out.println("Day " + (i + 1) + " begin " + sdf.format(cal.getTime()));
+			cal.add(Calendar.DAY_OF_YEAR, 1);
+			System.out.println("Day " + (i + 1) + " end " + sdf.format(cal.getTime()));
 		}
 	}
 
@@ -914,6 +929,7 @@ class Test {
 class User {
 	String name;
 	int age;
+	private int x = 100;
 
 	User(String name, int age) {
 		this.name = name;
@@ -937,6 +953,24 @@ class User {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int fix(int y) {
+		x = x - y;
+		return x;
+	}
+
+	public synchronized int getXSync() {
+		return x;
+	}
+
+	public synchronized int fixSync(int y) {
+		x = x - y;
+		return x;
 	}
 }
 
@@ -1006,14 +1040,39 @@ class SortObject implements Comparable<SortObject> {
 }
 
 class Job implements Runnable {
+	private User user = new User();
+
 	@Override
 	public void run() {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		for (int i = 0; i < 3; i++) {
+			this.fix(1);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println(Thread.currentThread().getName() + " : 当前user对象的x值= " + user.getX());
 		}
-		System.out.println("Job running...");
+	}
+
+	public int fix(int y) {
+		return user.fix(y);
+	}
+}
+
+class JobSync implements Runnable {
+	private User user = new User();
+
+	@Override
+	public void run() {
+		for (int i = 0; i < 3; i++) {
+			this.fix(1);
+			System.out.println(Thread.currentThread().getName() + " : 当前user对象的x值= " + user.getXSync());
+		}
+	}
+
+	public int fix(int y) {
+		return user.fixSync(y);
 	}
 }
 
