@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -64,8 +65,29 @@ public class MyTest {
 	 * @throws DocumentException
 	 */
 	public static void main(String[] args) throws Exception {
-		testThreadPool();
+		System.out.println(saveConvertDateString("20170504000000"));
+		System.out.println(saveConvertDateStringForPMM("20170504080000"));
 	}
+
+	private static Date saveConvertDateString(String dateString) throws ParseException {
+		if (dateString == null || dateString.trim().equals("")) {
+			return null;
+		}
+		return DateUtils.parseDate(dateString);
+	}
+
+    public static Date saveConvertDateStringForPMM(String dateString) throws ParseException{
+        if (dateString == null || dateString.trim().equals("")){
+            return null;
+        }
+        SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyyMMddHHmmss", Locale.ENGLISH);
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = simpleDateFormat.parse(dateString);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.add(Calendar.HOUR_OF_DAY, -8);
+        return cal.getTime();
+    }
 
 	public static String[] getPNO18Effectivity() {
 		String effectivityString = "2015-01-01..9999-12-31";
