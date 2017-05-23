@@ -65,8 +65,65 @@ public class MyTest {
 	 * @throws DocumentException
 	 */
 	public static void main(String[] args) throws Exception {
-		System.out.println(saveConvertDateString("20170504000000"));
-		System.out.println(saveConvertDateStringForPMM("20170504080000"));
+		testParseExpression();
+	}
+
+	private static void testParseExpression() {
+		String expression = "[CMA]AA00 = AA01 & ([CMA]AB00 != AB01 | [GD_1]AC00 = AC01) & [GD_1]AD00 != AD01";
+		System.out.println(parseExpression(expression));
+	}
+
+	private static String parseExpression(String expression) {
+		List<String> splitList = new ArrayList<String>();
+		List<String> speratorList = new ArrayList<String>();
+		splitExpression(expression, splitList, speratorList);
+
+		String result = "";
+		for (int i = 0; i < splitList.size(); i++) {
+			String splitString = splitList.get(i);
+			if (i < splitList.size() - 1) {
+				result += splitString.replaceAll("\\[[^,]*\\]", "") + speratorList.get(i);
+			} else {
+				result += splitString.replaceAll("\\[[^,]*\\]", "");
+			}
+		}
+
+		return result;
+	}
+
+	private static void splitExpression(String expression, List<String> splitList, List<String> speratorList) {
+		int indexOfAnd = 0;
+		int indexOfOr = 0;
+		if (expression.contains("&")) {
+			indexOfAnd = expression.indexOf("&");
+		}
+		if (expression.contains("|")) {
+			indexOfOr = expression.indexOf("|");
+		}
+		int index = 0;
+		if (indexOfAnd != 0 && indexOfOr == 0) {
+			index = indexOfAnd;
+			speratorList.add(" & ");
+		} else if (indexOfAnd == 0 && indexOfOr != 0) {
+			index = indexOfOr;
+			speratorList.add(" | ");
+		} else if (indexOfAnd < indexOfOr ) {
+			index = indexOfAnd;
+			speratorList.add(" & ");
+		} else if (indexOfAnd > indexOfOr) {
+			index = indexOfOr;
+			speratorList.add(" | ");
+		}
+
+		String leftExpression = expression.substring(0, index);
+		String rightExpression = expression.substring(index + 1);
+		splitList.add(leftExpression.trim());
+
+		if (rightExpression.contains("&") || rightExpression.contains("|")) {
+			splitExpression(rightExpression, splitList, speratorList);
+		} else {
+			splitList.add(rightExpression.trim());
+		}
 	}
 
 	private static Date saveConvertDateString(String dateString) throws ParseException {
