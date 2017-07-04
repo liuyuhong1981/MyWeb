@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>b.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+</head>
+
+<body>
+	This is my HTML page.
+	<br>
+</body>
+</html>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.0.js"></script>
+<script type="text/javascript">
+	$.ajax({
+		url : '/' + currentBlogApp + '/mvc/blog/Minyx2_Lite_SideColumn.aspx',
+		data : '{}',
+		type : 'post',
+		dataType : 'text',
+		contentType : 'application/json; charset=utf-8',
+		success : function(data) {
+			if (data) {
+
+				var zhi = $(data).find("h1");
+				$("#sideContainer").html(zhi);
+
+				loadBlogDefaultCalendar();
+
+				loadBlogSideBlocks();
+
+				var m = window.__blog.sideContainerRendered;
+
+				if (m) {
+					m(__$("sideContainer"));
+				}
+				window.__blog.sidebar.__layout();
+			}
+		}
+	});
+</script>
