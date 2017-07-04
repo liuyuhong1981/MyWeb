@@ -4,7 +4,7 @@
  * 
  * Created By Han Lin  - 6/20/2016
  */
-package org.lyh.myweb.common;
+package org.lyh.myweb.util;
 
 import org.apache.log4j.Logger;
 
@@ -14,9 +14,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class DateUtils {
+public class DateUtil {
 
-    private static Logger logger = Logger.getLogger(DateUtils.class);
+    private static Logger logger = Logger.getLogger(DateUtil.class);
 
     public static final String FORMAT_SIMPLE = "yyyyMMddHHmmss";
 

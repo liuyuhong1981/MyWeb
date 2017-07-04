@@ -4,7 +4,7 @@
  * 
  * Created By Liu Yuhong - 2017年5月16日
  */
-package org.lyh.myweb.common;
+package org.lyh.myweb.util;
 
 import java.util.Date;
 import java.util.Properties;
