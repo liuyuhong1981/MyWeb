@@ -66,7 +66,7 @@ public class MyTest {
      * @throws DocumentException
      */
     public static void main(String[] args) throws Exception {
-        testEnum(TestEnum.True);
+        mathTest2();
     }
 
     public enum TestEnum {
@@ -91,8 +91,8 @@ public class MyTest {
          * 120z + 0 -> LinearObjectiveFunction f = new
          * LinearObjectiveFunction({160, 180, 120}, 0);
          */
-        double[] objective = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };// z = x
-        LinearObjectiveFunction f = new LinearObjectiveFunction(objective, (150+100+200+150+100+200));
+        double[] objective = { 1, 0, 0, 0};// z = x
+        LinearObjectiveFunction f = new LinearObjectiveFunction(objective, 0);
 
         /**
          * 添加条件方程式 define constraint equation example: 2x + 4y + 2z <= 480 ->
@@ -100,6 +100,7 @@ public class MyTest {
          * Relationship.LEQ, 480));
          */
         Collection<LinearConstraint> constraints = new ArrayList<LinearConstraint>();
+
         /**
          * 
          * 
@@ -107,16 +108,10 @@ public class MyTest {
          * 
          * z = 200 x + z = 180 y = 120
          */
-        constraints.add(new LinearConstraint(new double[] { 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, Relationship.EQ, (150+100+200)*0.4));
-        constraints.add(new LinearConstraint(new double[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0 }, Relationship.EQ, (150+100+200)*0.3));
-        constraints.add(new LinearConstraint(new double[] { 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1 }, Relationship.EQ, (150+100+200+150+100+200)*0.23));
-        constraints.add(new LinearConstraint(new double[] { 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0 }, Relationship.EQ, (150+100+200+150+100+200)*0.17));
-        constraints.add(new LinearConstraint(new double[] { 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, Relationship.EQ, 150));
-        constraints.add(new LinearConstraint(new double[] { 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, Relationship.EQ, 100));
-        constraints.add(new LinearConstraint(new double[] { 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, Relationship.EQ, 200));
-        constraints.add(new LinearConstraint(new double[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0 }, Relationship.EQ, 150));
-        constraints.add(new LinearConstraint(new double[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0 }, Relationship.EQ, 100));
-        constraints.add(new LinearConstraint(new double[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1 }, Relationship.EQ, 200));
+        constraints.add(new LinearConstraint(new double[] { 1, 1, 0, 0 }, Relationship.EQ, 300));
+        constraints.add(new LinearConstraint(new double[] { 0, 0, 1, 1 }, Relationship.EQ, 900));
+        constraints.add(new LinearConstraint(new double[] { 1, 0, 1, 0 }, Relationship.EQ, 720));
+        constraints.add(new LinearConstraint(new double[] { 0, 1, 0, 1 }, Relationship.EQ, 480));
 
         /**
          * 创建并运行solver
@@ -136,6 +131,7 @@ public class MyTest {
                 System.out.print(solution.getPoint()[i] + "\t");
             }
         }
+
     }
 
     static void mathTest1() {
