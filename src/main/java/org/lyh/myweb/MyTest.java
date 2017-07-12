@@ -66,7 +66,18 @@ public class MyTest {
      * @throws DocumentException
      */
     public static void main(String[] args) throws Exception {
-        mathTest2();
+        System.out.println("Hello World ■");
+    }
+
+    public static void asciiToString(int num) {
+        System.out.println(num + " -> " + (char) num);
+    }
+
+    public static void stringToAscii(String str) {
+        char[] chars = str.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            System.out.println(chars[i] + " -> " + (int) chars[i]);
+        }
     }
 
     public enum TestEnum {
@@ -79,6 +90,7 @@ public class MyTest {
                 return false;
             }
         }
+
     }
 
     public static void testEnum(TestEnum param) {
@@ -91,7 +103,7 @@ public class MyTest {
          * 120z + 0 -> LinearObjectiveFunction f = new
          * LinearObjectiveFunction({160, 180, 120}, 0);
          */
-        double[] objective = { 1, 0, 0, 0};// z = x
+        double[] objective = { 1, 0, 0, 0 };// z = x
         LinearObjectiveFunction f = new LinearObjectiveFunction(objective, 0);
 
         /**
