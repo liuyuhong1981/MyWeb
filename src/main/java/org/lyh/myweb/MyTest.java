@@ -66,7 +66,42 @@ public class MyTest {
      * @throws DocumentException
      */
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello World ■");
+        enumTest(TestImpl.class);
+    }
+
+    interface TestInterface{
+        int value();
+        TestInterface[] getValues();
+    }
+
+    private enum TestImpl implements TestInterface{
+        aaa(1), bbb(2);
+
+        private int num;
+        TestImpl(int num) {
+            this.num = num;
+        }
+
+        @Override
+        public int value() {
+            return this.num;
+        }
+
+        @Override
+        public TestInterface[] getValues() {
+            return TestImpl.values();
+        }
+    }
+
+    private static void enumTest(Class<? extends TestInterface> clazz) throws Exception {
+
+        if(!clazz.isEnum()) {
+            throw new IllegalArgumentException();
+        }
+        TestInterface[] testArr = clazz.getEnumConstants();
+        for(TestInterface item : testArr) {
+            System.out.println(item.value());
+        }
     }
 
     public static void asciiToString(int num) {
