@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
@@ -66,7 +67,15 @@ public class MyTest {
      * @throws DocumentException
      */
     public static void main(String[] args) throws Exception {
-        enumTest(TestImpl.class);
+        testBase64();
+    }
+
+    private static void testBase64() {
+        String userAndPass = "lyh:12345";
+        String encodeStr = Base64.getEncoder().encodeToString(userAndPass.getBytes());
+        System.out.println(encodeStr);
+        String newUserAndPass = new String(Base64.getDecoder().decode(encodeStr.getBytes()));
+        System.out.println(newUserAndPass);
     }
 
     interface TestInterface{
