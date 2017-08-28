@@ -73,6 +73,11 @@ public class MyTest {
      */
     public static void main(String[] args) throws Exception {
         testMYSQLConnection();
+        
+    }
+
+    private static void testReflection() {
+        
     }
 
     private static void testMYSQLConnection() throws SQLException {
