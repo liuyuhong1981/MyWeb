@@ -3,6 +3,11 @@ package org.lyh.myweb;
 import static com.google.common.collect.FluentIterable.from;
 import static com.google.common.collect.Lists.newArrayList;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -67,7 +72,59 @@ public class MyTest {
      * @throws DocumentException
      */
     public static void main(String[] args) throws Exception {
-        testBase64();
+        testMYSQLConnection();
+    }
+
+    private static void testMYSQLConnection() throws SQLException {
+        String url = "jdbc:mysql://localhost:3306/xntscust?useUnicode=true&amp;characterEncoding=UTF-8";
+        String username = "root";
+        String password = "xiaoniu@2016";
+
+        Connection connection = null;
+        PreparedStatement psmt = null;
+        ResultSet rs = null;
+        try {
+            // Load the JDBC driver
+            String driverName = "com.mysql.jdbc.Driver";
+            Class.forName(driverName);
+            connection = DriverManager.getConnection(url, username, password);
+            System.out.println(" -> Connection built ....");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Could not find the database driver " + url + " ,Please check your action");
+            e.printStackTrace();
+            connection = null;
+        } catch (SQLException e) {
+            System.out.println("Could not connect to the database " + url + " ,Please check network");
+            connection = null;
+        }
+
+        String sql = "SELECT code_name FROM xntscust.t_sys_code where code_type=?";
+        System.out.println("SQL = " + sql);
+        try {
+            psmt = connection.prepareStatement(sql);
+            psmt.setString(1, "1");
+            rs = psmt.executeQuery();
+
+            while (rs.next()) {
+                System.out.println(rs.getString("code_name"));
+            }
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+            throw sqlEx;
+        } finally {
+            rs.close();
+            psmt.close();
+            connection.close();
+        }
+
+    }
+
+    private static void testFinal() {
+        final List<String> list = new ArrayList<String>();
+        list.add("1");
+        list.add("2");
+
+        System.out.println(list.size());
     }
 
     private static void testBase64() {
@@ -78,15 +135,17 @@ public class MyTest {
         System.out.println(newUserAndPass);
     }
 
-    interface TestInterface{
+    interface TestInterface {
         int value();
+
         TestInterface[] getValues();
     }
 
-    private enum TestImpl implements TestInterface{
+    private enum TestImpl implements TestInterface {
         aaa(1), bbb(2);
 
         private int num;
+
         TestImpl(int num) {
             this.num = num;
         }
@@ -104,11 +163,11 @@ public class MyTest {
 
     private static void enumTest(Class<? extends TestInterface> clazz) throws Exception {
 
-        if(!clazz.isEnum()) {
+        if (!clazz.isEnum()) {
             throw new IllegalArgumentException();
         }
         TestInterface[] testArr = clazz.getEnumConstants();
-        for(TestInterface item : testArr) {
+        for (TestInterface item : testArr) {
             System.out.println(item.value());
         }
     }
