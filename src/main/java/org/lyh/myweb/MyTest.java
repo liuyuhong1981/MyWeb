@@ -72,12 +72,30 @@ public class MyTest {
      * @throws DocumentException
      */
     public static void main(String[] args) throws Exception {
-        testMYSQLConnection();
-        
+        testLoop();
     }
 
-    private static void testReflection() {
-        
+    private static void testLoop() {
+        Boolean isOK = true;
+        for (int i = 0; i < 10 && isOK; i++) {
+            for (int j = 0; j < 5 && isOK; j++) {
+                if (i == 3 && j == 4) {
+                    System.out.println("i == " + i + ", j == " + j);
+                    isOK = false;
+                }
+            }
+            System.out.println(i);
+        }
+    }
+
+    private static void testCollectionOperation() {
+        Map<String, String> idMap = new HashMap<String, String>();
+        idMap.put("1", "aaa");
+        idMap.put("2", "bbb");
+        idMap.put("3", "ccc");
+        List<String> keyList = new ArrayList<String>(idMap.keySet());
+        keyList.remove("2");
+        System.out.println(keyList);
     }
 
     private static void testMYSQLConnection() throws SQLException {
@@ -103,11 +121,26 @@ public class MyTest {
             connection = null;
         }
 
-        String sql = "SELECT code_name FROM xntscust.t_sys_code where code_type=?";
+        List<String> list = new ArrayList<String>();
+        list.add("0");
+        list.add("1");
+        list.add("2");
+
+        String sql = "SELECT code_name FROM xntscust.t_sys_code where code_type in (";
+        for (int i = 0; i < list.size(); i++) {
+            if (i < list.size() - 1) {
+                sql += "?,";
+            } else {
+                sql += "?";
+            }
+        }
+        sql += ")";
         System.out.println("SQL = " + sql);
         try {
             psmt = connection.prepareStatement(sql);
-            psmt.setString(1, "1");
+            for (int i = 0; i < list.size(); i++) {
+                psmt.setString(i + 1, list.get(i));
+            }
             rs = psmt.executeQuery();
 
             while (rs.next()) {
