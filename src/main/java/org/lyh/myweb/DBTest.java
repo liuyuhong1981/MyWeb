@@ -20,18 +20,47 @@ import org.dom4j.DocumentException;
  */
 public class DBTest {
 
-    public static boolean flag = false;
-
     /**
      * @param args
      * @throws DocumentException
      */
     public static void main(String[] args) throws Exception {
-        testMycatConnection();
+        testMycatReloadCommand();
     }
 
-    public static void testMycatConnection() throws SQLException {
-//        String url = "jdbc:mysql://127.0.0.1:9066/mycat?useUnicode=true&amp;characterEncoding=UTF-8";
+    public static void testMycatReloadCommand() {
+        //        String url = "jdbc:mysql://127.0.0.1:9066/mycat?useUnicode=true&amp;characterEncoding=UTF-8";
+        String url = "jdbc:mysql://127.0.0.1:9066";
+        String username = "root";
+        String password = "root";
+
+        Connection connection = null;
+        PreparedStatement psmt = null;
+        try {
+            // Load the JDBC driver
+            String driverName = "com.mysql.jdbc.Driver";
+            Class.forName(driverName);
+            connection = DriverManager.getConnection(url, username, password);
+            System.out.println(" -> Connection built ....");
+
+            String sql = "reload @@config_all";
+            psmt = connection.prepareStatement(sql);
+            psmt.execute();
+            System.out.println("All config reload successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                psmt.close();
+                connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void testMycatQueryCommand() throws SQLException {
+        //        String url = "jdbc:mysql://127.0.0.1:9066/mycat?useUnicode=true&amp;characterEncoding=UTF-8";
         String url = "jdbc:mysql://127.0.0.1:9066";
         String username = "root";
         String password = "root";
@@ -45,23 +74,6 @@ public class DBTest {
             Class.forName(driverName);
             connection = DriverManager.getConnection(url, username, password);
             System.out.println(" -> Connection built ....");
-
-            String sql = "show @@help";
-            try {
-                psmt = connection.prepareStatement(sql);
-                rs = psmt.executeQuery();
-
-                while (rs.next()) {
-                    System.out.println(rs.getString(1));
-                }
-            } catch (SQLException sqlEx) {
-                sqlEx.printStackTrace();
-                throw sqlEx;
-            } finally {
-                rs.close();
-                psmt.close();
-                connection.close();
-            }
         } catch (ClassNotFoundException e) {
             System.out.println("Could not find the database driver " + url + " ,Please check your action");
             e.printStackTrace();
@@ -71,6 +83,24 @@ public class DBTest {
             connection = null;
         }
 
+        String sql = "show @@help";
+        try {
+            psmt = connection.prepareStatement(sql);
+            rs = psmt.executeQuery();
+
+            while (rs != null && rs.next()) {
+                System.out.println(rs.getString(1));
+            }
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+            throw sqlEx;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            psmt.close();
+            connection.close();
+        }
     }
 
     public static void testMYSQLConnection() throws SQLException {
