@@ -30,9 +30,9 @@ public class DBTest {
 
     public static void testMycatReloadCommand() {
         //        String url = "jdbc:mysql://127.0.0.1:9066/mycat?useUnicode=true&amp;characterEncoding=UTF-8";
-        String url = "jdbc:mysql://127.0.0.1:9066";
-        String username = "root";
-        String password = "root";
+        String url = "jdbc:mysql://192.168.116.128:9066";
+        String username = "test";
+        String password = "test";
 
         Connection connection = null;
         PreparedStatement psmt = null;
@@ -42,7 +42,16 @@ public class DBTest {
             Class.forName(driverName);
             connection = DriverManager.getConnection(url, username, password);
             System.out.println(" -> Connection built ....");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Could not find the database driver " + url + " ,Please check your action");
+            e.printStackTrace();
+            connection = null;
+        } catch (SQLException e) {
+            System.out.println("Could not connect to the database " + url + " ,Please check network");
+            connection = null;
+        }
 
+        try {
             String sql = "reload @@config_all";
             psmt = connection.prepareStatement(sql);
             psmt.execute();
@@ -59,11 +68,11 @@ public class DBTest {
         }
     }
 
-    public static void testMycatQueryCommand() throws SQLException {
+    public static void testMycatQuery() throws SQLException {
         //        String url = "jdbc:mysql://127.0.0.1:9066/mycat?useUnicode=true&amp;characterEncoding=UTF-8";
-        String url = "jdbc:mysql://127.0.0.1:9066";
-        String username = "root";
-        String password = "root";
+        String url = "jdbc:mysql://192.168.116.128:8066/TESTDB";
+        String username = "test";
+        String password = "test";
 
         Connection connection = null;
         PreparedStatement psmt = null;
@@ -83,7 +92,7 @@ public class DBTest {
             connection = null;
         }
 
-        String sql = "show @@help";
+        String sql = "select user()";
         try {
             psmt = connection.prepareStatement(sql);
             rs = psmt.executeQuery();
