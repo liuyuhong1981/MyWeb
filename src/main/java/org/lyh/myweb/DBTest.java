@@ -25,7 +25,7 @@ public class DBTest {
      * @throws DocumentException
      */
     public static void main(String[] args) throws Exception {
-        testMycatReloadCommand();
+        testOracleConnection();
     }
 
     public static void testMycatReloadCommand() {
@@ -169,6 +169,43 @@ public class DBTest {
             connection.close();
         }
 
+    }
+
+    public static void testOracleConnection() throws SQLException {
+        String url = "jdbc:oracle:thin:@//10.18.27.15:1521/dzzwdb";//service_name
+//        String url = "jdbc:oracle:thin:@10.18.27.15:1521:dzzwdb";//sid
+        String username = "legal";
+        String password = "123456";
+        String sql = "select 1 from dual";
+
+        Connection connection = null;
+        PreparedStatement psmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Load the JDBC driver
+            String driverName = "oracle.jdbc.driver.OracleDriver";
+            Class.forName(driverName);
+            connection = DriverManager.getConnection(url, username, password);
+            System.out.println(" -> Connection built ....");
+
+            psmt = connection.prepareStatement(sql);
+            rs = psmt.executeQuery();
+
+            while (rs.next()) {
+                System.out.println(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                psmt.close();
+                connection.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
 }
