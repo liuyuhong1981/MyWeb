@@ -7,6 +7,7 @@
  */
 package org.lyh.myweb;
 
+import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,7 +23,16 @@ import org.lyh.myweb.dto.User;
 
 public class BasicTest {
 
-    public static void testFinal() {
+    public static void main(String[] args) throws Exception {
+        testGetMethod(new BasicTest(), "testFinal");
+    }
+
+    public static void testGetMethod(Object obj, String testFinal) throws Exception {
+        Method method = obj.getClass().getDeclaredMethod(testFinal, String.class);
+        System.out.println(method.getName());
+    }
+
+    public static void testFinal(String arg) {
         final List<String> list = new ArrayList<String>();
         list.add("1");
         list.add("2");
