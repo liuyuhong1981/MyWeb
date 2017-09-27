@@ -7,6 +7,11 @@
  */
 package org.lyh.myweb;
 
+import java.awt.Desktop;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,11 +29,29 @@ import org.lyh.myweb.dto.User;
 public class BasicTest {
 
     public static void main(String[] args) throws Exception {
-        testGetMethod(new BasicTest(), "testFinal");
+        testRunSwingDesktopProgram();
     }
 
-    public static void testGetMethod(Object obj, String testFinal) throws Exception {
-        Method method = obj.getClass().getDeclaredMethod(testFinal, String.class);
+    public static void testRunSwingDesktopProgram() throws IOException, ClassNotFoundException, Exception {
+        Robot robot = new Robot();
+        String text = "Hello";
+        File file = File.createTempFile("tmp", ".txt");
+
+        if (Desktop.isDesktopSupported()) {
+            Desktop.getDesktop().edit(file);
+            Thread.sleep(1000);
+        } else {
+            // dunno, up to you to handle this
+        }
+        for (char c : text.toCharArray()) {
+            int keyEvent = KeyEvent.getExtendedKeyCodeForChar(c);
+            robot.keyPress(keyEvent);
+            Thread.sleep(500);
+        }
+    }
+
+    public static void testGetMethod() throws Exception {
+        Method method = new BasicTest().getClass().getDeclaredMethod("testFinal", String.class);
         System.out.println(method.getName());
     }
 
