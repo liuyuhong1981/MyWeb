@@ -25,7 +25,51 @@ public class DBTest {
      * @throws DocumentException
      */
     public static void main(String[] args) throws Exception {
-        testOracleConnection();
+        testMySQLConnection();
+    }
+
+    public static void testMySQLConnection() throws SQLException {
+
+        String url = "jdbc:mysql://10.18.27.217:3306/data-stage?useUnicode=true&amp;characterEncoding=utf8";
+        String username = "root";
+        String password = "root";
+
+        Connection connection = null;
+        PreparedStatement psmt = null;
+        ResultSet rs = null;
+        try {
+            // Load the JDBC driver
+            String driverName = "com.mysql.jdbc.Driver";
+            Class.forName(driverName);
+            connection = DriverManager.getConnection(url, username, password);
+            System.out.println(" -> Connection built ....");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Could not find the database driver " + url + " ,Please check your action");
+            e.printStackTrace();
+            connection = null;
+        } catch (SQLException e) {
+            System.out.println("Could not connect to the database " + url + " ,Please check network");
+            connection = null;
+        }
+
+        String sql = "select user()";
+        try {
+            psmt = connection.prepareStatement(sql);
+            rs = psmt.executeQuery();
+
+            while (rs != null && rs.next()) {
+                System.out.println(rs.getString(1));
+            }
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+            throw sqlEx;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            psmt.close();
+            connection.close();
+        }
     }
 
     public static void testMycatReloadCommand() {
