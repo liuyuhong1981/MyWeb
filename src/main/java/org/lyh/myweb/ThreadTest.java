@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
+import org.eclipse.jdt.internal.compiler.batch.Main;
 import org.lyh.myweb.dto.Job;
 import org.lyh.myweb.dto.MyThread;
 import org.lyh.myweb.dto.MyThread2;
@@ -20,6 +21,10 @@ import org.lyh.myweb.dto.MyThread2;
 public class ThreadTest {
     
     public static boolean flag = false;
+    
+    public static void main(String[] args) throws Exception {
+        testThreadPool();
+    }
 
     public static void testThreadPool() throws InterruptedException {
         System.out.println("Add non-sync Job.");

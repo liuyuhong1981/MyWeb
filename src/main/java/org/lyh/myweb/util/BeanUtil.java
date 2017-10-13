@@ -28,7 +28,7 @@ public class BeanUtil {
     }
 
     /**
-     * 复制对象的属性值 （注：赞不支持对象关系、不能类型及日期的复制）
+     * 复制对象的属性值 （注：暂不支持对象关系、不能类型及日期的复制）
      * @param from
      * @param to
      * @return
@@ -79,7 +79,7 @@ public class BeanUtil {
     }
 
     /**
-     * 将Map值复制到对象属性 （注：赞不支持对象关系、不能类型及日期的复制）
+     * 将Map值复制到对象属性 （注：只支持String类型的属性）
      * @param from
      * @param to
      * @return
