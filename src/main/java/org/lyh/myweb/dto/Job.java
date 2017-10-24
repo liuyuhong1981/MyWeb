@@ -26,4 +26,5 @@ public class Job implements Runnable {
     public int fix(int y) {
         return user.fix(y);
     }
+
 }

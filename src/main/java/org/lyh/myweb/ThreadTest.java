@@ -5,10 +5,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
-import org.eclipse.jdt.internal.compiler.batch.Main;
+import org.lyh.myweb.dto.CopyOnWriteJob;
 import org.lyh.myweb.dto.Job;
 import org.lyh.myweb.dto.MyThread;
 import org.lyh.myweb.dto.MyThread2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -19,11 +21,25 @@ import org.lyh.myweb.dto.MyThread2;
  *
  */
 public class ThreadTest {
-    
+    static Logger logger = LoggerFactory.getLogger(ThreadTest.class);
+
     public static boolean flag = false;
-    
+
     public static void main(String[] args) throws Exception {
-        testThreadPool();
+        testConcurrentCollection();
+    }
+
+    public static void testConcurrentCollection() throws Exception {
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        CopyOnWriteJob job = new CopyOnWriteJob();
+        job.getList().add("1");
+        job.getList().add("2");
+        job.getList().add("3");
+        executorService.execute(job);
+        for (int i = 4; i < 10; i++) {
+            logger.info("向list添加内容：{}", i);
+            job.getList().add(String.valueOf(i));
+        }
     }
 
     public static void testThreadPool() throws InterruptedException {
