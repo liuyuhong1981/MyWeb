@@ -35,10 +35,15 @@ public class ThreadTest {
         job.getList().add("1");
         job.getList().add("2");
         job.getList().add("3");
+        job.getList().add("4");
         executorService.execute(job);
-        for (int i = 4; i < 10; i++) {
+        for (int i = 5; i < 15; i++) {
+            if (i == 10) {
+                job.setFinish(true);
+            }
             logger.info("向list添加内容：{}", i);
             job.getList().add(String.valueOf(i));
+            Thread.sleep(1000);
         }
     }
 
