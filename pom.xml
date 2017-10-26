@@ -105,8 +105,30 @@
 					<source>1.8</source>
 					<target>1.8</target>
 					<compilerArgs>
-						<extdirs>${project.basedir}\libs</extdirs>
+						<arg>-verbose</arg>
+						<arg>-Xlint:unchecked</arg>
+						<arg>-Xlint:deprecation</arg>
+						<arg>-bootclasspath</arg>
+						<arg>${env.JAVA_HOME}/jre/lib/rt.jar</arg>
+						<arg>-extdirs</arg>
+						<arg>${project.basedir}/libs</arg>
 					</compilerArgs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>${project.basedir}/libs</directory>
+							<targetPath>WEB-INF/lib</targetPath>
+							<filtering>true</filtering>
+							<includes>
+								<include>**/*.jar</include>
+							</includes>
+						</resource>
+					</webResources>
 				</configuration>
 			</plugin>
 			<plugin>
