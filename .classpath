@@ -8,7 +8,6 @@
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" output="target/classes" path="src/main/java">
@@ -31,5 +30,6 @@
 	<classpathentry kind="lib" path="libs/httpcore-4.0.jar"/>
 	<classpathentry kind="lib" path="libs/mail-1.4.jar"/>
 	<classpathentry kind="lib" path="libs/ojdbc6_g.jar"/>
+	<classpathentry kind="lib" path="libs/MyUtil.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

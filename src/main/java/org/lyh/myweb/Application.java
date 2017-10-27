@@ -1,5 +1,6 @@
 package org.lyh.myweb;
 
+import org.lyh.myutil.TestUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -12,8 +13,9 @@ import org.springframework.web.context.request.RequestContextListener;
  */
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
-	
+
     public static void main(String[] args) {
+        TestUtil.test();
         SpringApplication.run(Application.class);
     }
 
