@@ -1,0 +1,70 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'application'
+
+compileJava {
+    options.encoding = "UTF-8"
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+version = '0.0.1-SNAPSHOT'
+
+jar {
+    baseName = 'MyWeb'
+    manifest {
+        attributes 'Main-Class': 'org.lyh.myweb.Application'
+    }
+}
+
+war {
+    baseName = 'MyWeb'
+    manifest {
+        attributes 'Main-Class': 'org.lyh.myweb.Application'
+    }
+}
+
+
+repositories {
+	mavenLocal()
+	maven { url "C:/MyTools/.m2/repository" }
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+	mavenCentral()
+	maven { url "https://repo.spring.io/libs-release" }
+}
+
+
+dependencies {
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '1.5.0.RELEASE', ext: 'pom'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    compile 'org.springframework.boot:spring-boot-starter-aop'
+    compile 'org.springframework:spring-aspects'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+    compile 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    compile 'javax.servlet:jstl'
+    compile 'net.sf.json-lib:json-lib:2.4:jdk15'
+    compile 'com.google.guava:guava:18.0'
+    compile 'org.apache.commons:commons-math3:3.2'
+    compile 'org.dom4j:dom4j:2.0.0'
+    compile 'mysql:mysql-connector-java:5.1.12'
+    compile 'com.google.guava:guava:18.0'
+
+	compile fileTree(dir: 'libs', include: '*.jar')
+}
+
+buildscript {
+    repositories {
+		mavenLocal()
+		maven { url "C:/MyTools/.m2/repository" }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+		mavenCentral()
+		maven { url "https://repo.spring.io/libs-release" }
+
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.0.RELEASE")
+    }
+}

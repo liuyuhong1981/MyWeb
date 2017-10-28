@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.lyh.myweb.MyServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-10-28T05:23:00" hostname="EH14807635" time="0.111">
+  <properties/>
+  <testcase name="test1" classname="org.lyh.myweb.MyServiceTest" time="0.111"/>
+  <system-out><![CDATA[13:22:51,494 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.groovy]
+13:22:51,494 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+13:22:51,494 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/C:/ProjectSrc/MyWeb/build/resources/main/logback.xml]
+13:22:51,592 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+13:22:51,616 |-INFO in ch.qos.logback.core.joran.util.ConfigurationWatchListUtil@743bbf33 - Adding [jar:file:/C:/MyTools/.m2/repository/org/springframework/boot/spring-boot/1.5.0.RELEASE/spring-boot-1.5.0.RELEASE.jar!/org/springframework/boot/logging/logback/base.xml] to configuration watch list.
+13:22:51,616 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@b797cbc - URL [jar:file:/C:/MyTools/.m2/repository/org/springframework/boot/spring-boot/1.5.0.RELEASE/spring-boot-1.5.0.RELEASE.jar!/org/springframework/boot/logging/logback/base.xml] is not of type file
+13:22:51,620 |-INFO in ch.qos.logback.core.joran.util.ConfigurationWatchListUtil@743bbf33 - Adding [jar:file:/C:/MyTools/.m2/repository/org/springframework/boot/spring-boot/1.5.0.RELEASE/spring-boot-1.5.0.RELEASE.jar!/org/springframework/boot/logging/logback/defaults.xml] to configuration watch list.
+13:22:51,620 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@b797cbc - URL [jar:file:/C:/MyTools/.m2/repository/org/springframework/boot/spring-boot/1.5.0.RELEASE/spring-boot-1.5.0.RELEASE.jar!/org/springframework/boot/logging/logback/defaults.xml] is not of type file
+13:22:51,623 |-INFO in ch.qos.logback.core.joran.action.ConversionRuleAction - registering conversion word clr with class [org.springframework.boot.logging.logback.ColorConverter]
+13:22:51,623 |-INFO in ch.qos.logback.core.joran.action.ConversionRuleAction - registering conversion word wex with class [org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter]
+13:22:51,623 |-INFO in ch.qos.logback.core.joran.action.ConversionRuleAction - registering conversion word wEx with class [org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter]
+13:22:51,628 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [org.springframework.boot.logging.logback.LevelRemappingAppender]
+13:22:51,630 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [DEBUG_LEVEL_REMAPPER]
+13:22:51,648 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.apache.catalina.startup.DigesterFactory] to ERROR
+13:22:51,648 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.apache.catalina.util.LifecycleBase] to ERROR
+13:22:51,648 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.apache.coyote.http11.Http11NioProtocol] to WARN
+13:22:51,648 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.apache.sshd.common.util.SecurityUtils] to WARN
+13:22:51,648 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.apache.tomcat.util.net.NioSelectorPool] to WARN
+13:22:51,648 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.crsh.plugin] to WARN
+13:22:51,648 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.crsh.ssh] to WARN
+13:22:51,648 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.eclipse.jetty.util.component.AbstractLifeCycle] to ERROR
+13:22:51,648 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.hibernate.validator.internal.util.Version] to WARN
+13:22:51,648 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.springframework.boot.actuate.autoconfigure.CrshAutoConfiguration] to WARN
+13:22:51,648 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting additivity of logger [org.springframework.boot.actuate.endpoint.jmx] to false
+13:22:51,649 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [DEBUG_LEVEL_REMAPPER] to Logger[org.springframework.boot.actuate.endpoint.jmx]
+13:22:51,650 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting additivity of logger [org.thymeleaf] to false
+13:22:51,650 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [DEBUG_LEVEL_REMAPPER] to Logger[org.thymeleaf]
+13:22:51,650 |-INFO in ch.qos.logback.core.joran.util.ConfigurationWatchListUtil@743bbf33 - Adding [jar:file:/C:/MyTools/.m2/repository/org/springframework/boot/spring-boot/1.5.0.RELEASE/spring-boot-1.5.0.RELEASE.jar!/org/springframework/boot/logging/logback/console-appender.xml] to configuration watch list.
+13:22:51,650 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@b797cbc - URL [jar:file:/C:/MyTools/.m2/repository/org/springframework/boot/spring-boot/1.5.0.RELEASE/spring-boot-1.5.0.RELEASE.jar!/org/springframework/boot/logging/logback/console-appender.xml] is not of type file
+13:22:51,652 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+13:22:51,656 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [CONSOLE]
+13:22:51,658 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+13:22:51,700 |-INFO in ch.qos.logback.core.joran.util.ConfigurationWatchListUtil@743bbf33 - Adding [jar:file:/C:/MyTools/.m2/repository/org/springframework/boot/spring-boot/1.5.0.RELEASE/spring-boot-1.5.0.RELEASE.jar!/org/springframework/boot/logging/logback/file-appender.xml] to configuration watch list.
+13:22:51,700 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@b797cbc - URL [jar:file:/C:/MyTools/.m2/repository/org/springframework/boot/spring-boot/1.5.0.RELEASE/spring-boot-1.5.0.RELEASE.jar!/org/springframework/boot/logging/logback/file-appender.xml] is not of type file
+13:22:51,705 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+13:22:51,712 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [FILE]
+13:22:51,715 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+13:22:51,727 |-INFO in ch.qos.logback.core.rolling.FixedWindowRollingPolicy@4895ecbb - No compression will be used
+13:22:51,733 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Active log file name: C:\Users\liuyuho\AppData\Local\Temp\/spring.log
+13:22:51,733 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - File property is set to [C:\Users\liuyuho\AppData\Local\Temp\/spring.log]
+13:22:51,735 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+13:22:51,735 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [CONSOLE] to Logger[ROOT]
+13:22:51,735 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [FILE] to Logger[ROOT]
+13:22:51,736 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+13:22:51,736 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [dailyRollingFileAppender]
+13:22:51,746 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@1327096966 - No compression will be used
+13:22:51,747 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@1327096966 - Will use the pattern c:/logs/myweb.%d.%i.log for the active file
+13:22:51,751 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@66f20871 - The date pattern is 'yyyy-MM-dd' from file name pattern 'c:/logs/myweb.%d.%i.log'.
+13:22:51,751 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@66f20871 - Roll-over at midnight.
+13:22:51,756 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@66f20871 - Setting initial period to Sat Oct 28 13:22:51 CST 2017
+13:22:51,757 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@66f20871 - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+13:22:51,757 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@66f20871 - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+13:22:51,761 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+13:22:51,762 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[dailyRollingFileAppender] - Active log file name: c:/logs/myweb.2017-10-28.0.log
+13:22:51,762 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[dailyRollingFileAppender] - File property is set to [null]
+13:22:51,763 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.springframework.beans.factory.support] to ERROR
+13:22:51,763 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [dailyRollingFileAppender] to Logger[org.springframework.beans.factory.support]
+13:22:51,763 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.springframework.web] to DEBUG
+13:22:51,763 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [dailyRollingFileAppender] to Logger[org.springframework.web]
+13:22:51,763 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.lyh.myweb] to DEBUG
+13:22:51,763 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [dailyRollingFileAppender] to Logger[org.lyh.myweb]
+13:22:51,763 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+13:22:51,765 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@262e048f - Registering current configuration as safe fallback point
+
+2017-10-28 13:22:51.896  INFO   --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [org.lyh.myweb.MyServiceTest], using SpringBootContextLoader
+2017-10-28 13:22:51.906  INFO   --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.lyh.myweb.MyServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-10-28 13:22:52.001  INFO   --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2017-10-28 13:22:52.014  INFO   --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Could not instantiate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]. Specify custom listener classes or make the default listener classes (and their required dependencies) available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
+2017-10-28 13:22:52.015  INFO   --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Could not instantiate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener]. Specify custom listener classes or make the default listener classes (and their required dependencies) available. Offending class: [org/springframework/transaction/interceptor/TransactionAttributeSource]
+2017-10-28 13:22:52.020  INFO   --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@50a15475, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@736487d4, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@3c2d675d, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2b6343ef, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@71bbb80a, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@26b6dbce, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@71f657ca, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@40bb0e20, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@6cec85d5, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@7c945b2d]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.5.0.RELEASE)
+
+2017-10-28 13:22:52.884  INFO 17500 --- [    Test worker] org.lyh.myweb.MyServiceTest              : Starting MyServiceTest on EH14807635 with PID 17500 (started by liuyuho in C:\ProjectSrc\MyWeb)
+2017-10-28 13:22:52.886 DEBUG 17500 --- [    Test worker] org.lyh.myweb.MyServiceTest              : Running with Spring Boot v1.5.0.RELEASE, Spring v4.3.6.RELEASE
+2017-10-28 13:22:52.888  INFO 17500 --- [    Test worker] org.lyh.myweb.MyServiceTest              : No active profile set, falling back to default profiles: default
+2017-10-28 13:22:53.032  INFO 17500 --- [    Test worker] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@45a1808a: startup date [Sat Oct 28 13:22:53 CST 2017]; root of context hierarchy
+2017-10-28 13:22:53.033 DEBUG 17500 --- [    Test worker] o.s.w.c.s.GenericWebApplicationContext   : Bean factory for org.springframework.web.context.support.GenericWebApplicationContext@45a1808a: org.springframework.beans.factory.support.DefaultListableBeanFactory@1db1e799: defining beans [org.springframework.boot.test.mock.mockito.MockitoPostProcessor$SpyPostProcessor,org.springframework.boot.test.mock.mockito.MockitoPostProcessor,org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,application]; root of factory hierarchy
+2017-10-28 13:22:56.003  INFO 17500 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration' of type [class org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-28 13:22:56.206  INFO 17500 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'validator' of type [class org.springframework.validation.beanvalidation.LocalValidatorFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-28 13:22:56.755 DEBUG 17500 --- [    Test worker] o.s.w.c.s.GenericWebApplicationContext   : Unable to locate MessageSource with name 'messageSource': using default [org.springframework.context.support.DelegatingMessageSource@5d1869f8]
+2017-10-28 13:22:56.757 DEBUG 17500 --- [    Test worker] o.s.w.c.s.GenericWebApplicationContext   : Unable to locate ApplicationEventMulticaster with name 'applicationEventMulticaster': using default [org.springframework.context.event.SimpleApplicationEventMulticaster@7ca1f601]
+2017-10-28 13:22:57.063 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [servletConfigInitParams] PropertySource with lowest search precedence
+2017-10-28 13:22:57.065 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [servletContextInitParams] PropertySource with lowest search precedence
+2017-10-28 13:22:57.071 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [systemProperties] PropertySource with lowest search precedence
+2017-10-28 13:22:57.073 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [systemEnvironment] PropertySource with lowest search precedence
+2017-10-28 13:22:57.073 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Initialized StandardServletEnvironment with PropertySources [servletConfigInitParams,servletContextInitParams,systemProperties,systemEnvironment]
+2017-10-28 13:22:58.654  INFO 17500 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@45a1808a: startup date [Sat Oct 28 13:22:53 CST 2017]; root of context hierarchy
+2017-10-28 13:22:58.975 DEBUG 17500 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Looking for request mappings in application context: org.springframework.web.context.support.GenericWebApplicationContext@45a1808a: startup date [Sat Oct 28 13:22:53 CST 2017]; root of context hierarchy
+2017-10-28 13:22:58.995 DEBUG 17500 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : 2 request handler methods found on class org.lyh.myweb.web.RootController: {public java.lang.String org.lyh.myweb.web.RootController.index()={[/]}, public java.lang.String org.lyh.myweb.web.RootController.scroll()={[/scroll]}}
+2017-10-28 13:22:58.998  INFO 17500 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/]}" onto public java.lang.String org.lyh.myweb.web.RootController.index()
+2017-10-28 13:22:59.002  INFO 17500 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/scroll]}" onto public java.lang.String org.lyh.myweb.web.RootController.scroll()
+2017-10-28 13:22:59.051 DEBUG 17500 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : 2 request handler methods found on class org.springframework.boot.autoconfigure.web.BasicErrorController: {public org.springframework.http.ResponseEntity org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)={[/error]}, public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)={[/error],produces=[text/html]}}
+2017-10-28 13:22:59.053  INFO 17500 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-10-28 13:22:59.055  INFO 17500 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-10-28 13:22:59.224 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Looking for URL mappings in application context: org.springframework.web.context.support.GenericWebApplicationContext@45a1808a: startup date [Sat Oct 28 13:22:53 CST 2017]; root of context hierarchy
+2017-10-28 13:22:59.225 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.test.mock.mockito.MockitoPostProcessor$SpyPostProcessor': no URL paths identified
+2017-10-28 13:22:59.229 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.test.mock.mockito.MockitoPostProcessor': no URL paths identified
+2017-10-28 13:22:59.230 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor': no URL paths identified
+2017-10-28 13:22:59.232 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor': no URL paths identified
+2017-10-28 13:22:59.233 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.context.annotation.internalRequiredAnnotationProcessor': no URL paths identified
+2017-10-28 13:22:59.235 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.context.annotation.internalCommonAnnotationProcessor': no URL paths identified
+2017-10-28 13:22:59.237 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.context.event.internalEventListenerProcessor': no URL paths identified
+2017-10-28 13:22:59.239 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.context.event.internalEventListenerFactory': no URL paths identified
+2017-10-28 13:22:59.242 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'application': no URL paths identified
+2017-10-28 13:22:59.244 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory': no URL paths identified
+2017-10-28 13:22:59.245 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'serviceAspect': no URL paths identified
+2017-10-28 13:22:59.251 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'messageService': no URL paths identified
+2017-10-28 13:22:59.253 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'myService': no URL paths identified
+2017-10-28 13:22:59.254 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'myService2': no URL paths identified
+2017-10-28 13:22:59.255 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'rootController': no URL paths identified
+2017-10-28 13:22:59.256 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.web.support.SpringBootServletInitializer$ErrorPageFilterConfiguration': no URL paths identified
+2017-10-28 13:22:59.258 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'errorPageFilter': no URL paths identified
+2017-10-28 13:22:59.261 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'requestContextListener': no URL paths identified
+2017-10-28 13:22:59.263 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.AutoConfigurationPackages': no URL paths identified
+2017-10-28 13:22:59.264 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.266 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.condition.BeanTypeRegistry': no URL paths identified
+2017-10-28 13:22:59.267 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'propertySourcesPlaceholderConfigurer': no URL paths identified
+2017-10-28 13:22:59.268 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$Jackson2ObjectMapperBuilderCustomizerConfiguration': no URL paths identified
+2017-10-28 13:22:59.268 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'standardJacksonObjectMapperBuilderCustomizer': no URL paths identified
+2017-10-28 13:22:59.269 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'spring.jackson-org.springframework.boot.autoconfigure.jackson.JacksonProperties': no URL paths identified
+2017-10-28 13:22:59.271 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor': no URL paths identified
+2017-10-28 13:22:59.273 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor.store': no URL paths identified
+2017-10-28 13:22:59.275 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperBuilderConfiguration': no URL paths identified
+2017-10-28 13:22:59.276 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'jacksonObjectMapperBuilder': no URL paths identified
+2017-10-28 13:22:59.277 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration': no URL paths identified
+2017-10-28 13:22:59.279 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'jacksonObjectMapper': no URL paths identified
+2017-10-28 13:22:59.279 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.280 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'jsonComponentModule': no URL paths identified
+2017-10-28 13:22:59.280 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration$TomcatWebSocketConfiguration': no URL paths identified
+2017-10-28 13:22:59.282 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'websocketContainerCustomizer': no URL paths identified
+2017-10-28 13:22:59.282 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.284 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration$EmbeddedTomcat': no URL paths identified
+2017-10-28 13:22:59.284 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'tomcatEmbeddedServletContainerFactory': no URL paths identified
+2017-10-28 13:22:59.285 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.286 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'embeddedServletContainerCustomizerBeanPostProcessor': no URL paths identified
+2017-10-28 13:22:59.287 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'errorPageRegistrarBeanPostProcessor': no URL paths identified
+2017-10-28 13:22:59.289 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration$DispatcherServletConfiguration': no URL paths identified
+2017-10-28 13:22:59.294 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'dispatcherServlet': no URL paths identified
+2017-10-28 13:22:59.303 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'spring.mvc-org.springframework.boot.autoconfigure.web.WebMvcProperties': no URL paths identified
+2017-10-28 13:22:59.306 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration$DispatcherServletRegistrationConfiguration': no URL paths identified
+2017-10-28 13:22:59.307 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'dispatcherServletRegistration': no URL paths identified
+2017-10-28 13:22:59.308 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.309 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration': no URL paths identified
+2017-10-28 13:22:59.310 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'error': no URL paths identified
+2017-10-28 13:22:59.312 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'beanNameViewResolver': no URL paths identified
+2017-10-28 13:22:59.313 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$DefaultErrorViewResolverConfiguration': no URL paths identified
+2017-10-28 13:22:59.313 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'conventionErrorViewResolver': no URL paths identified
+2017-10-28 13:22:59.314 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.315 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'errorAttributes': no URL paths identified
+2017-10-28 13:22:59.316 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'basicErrorController': no URL paths identified
+2017-10-28 13:22:59.316 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'errorPageCustomizer': no URL paths identified
+2017-10-28 13:22:59.316 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'preserveErrorControllerTargetClassPostProcessor': no URL paths identified
+2017-10-28 13:22:59.317 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'spring.resources-org.springframework.boot.autoconfigure.web.ResourceProperties': no URL paths identified
+2017-10-28 13:22:59.318 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$EnableWebMvcConfiguration': no URL paths identified
+2017-10-28 13:22:59.319 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'requestMappingHandlerAdapter': no URL paths identified
+2017-10-28 13:22:59.319 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'requestMappingHandlerMapping': no URL paths identified
+2017-10-28 13:22:59.320 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'mvcPathMatcher': no URL paths identified
+2017-10-28 13:22:59.320 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'mvcUrlPathHelper': no URL paths identified
+2017-10-28 13:22:59.321 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'mvcContentNegotiationManager': no URL paths identified
+2017-10-28 13:22:59.322 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'viewControllerHandlerMapping': no URL paths identified
+2017-10-28 13:22:59.323 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'beanNameHandlerMapping': no URL paths identified
+2017-10-28 13:22:59.323 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'resourceHandlerMapping': no URL paths identified
+2017-10-28 13:22:59.323 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'mvcResourceUrlProvider': no URL paths identified
+2017-10-28 13:22:59.323 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'defaultServletHandlerMapping': no URL paths identified
+2017-10-28 13:22:59.324 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'mvcConversionService': no URL paths identified
+2017-10-28 13:22:59.324 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'mvcValidator': no URL paths identified
+2017-10-28 13:22:59.324 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'mvcUriComponentsContributor': no URL paths identified
+2017-10-28 13:22:59.324 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'httpRequestHandlerAdapter': no URL paths identified
+2017-10-28 13:22:59.325 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'simpleControllerHandlerAdapter': no URL paths identified
+2017-10-28 13:22:59.325 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'handlerExceptionResolver': no URL paths identified
+2017-10-28 13:22:59.325 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'mvcViewResolver': no URL paths identified
+2017-10-28 13:22:59.325 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter$FaviconConfiguration': no URL paths identified
+2017-10-28 13:22:59.325 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'faviconHandlerMapping': no URL paths identified
+2017-10-28 13:22:59.326 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'faviconRequestHandler': no URL paths identified
+2017-10-28 13:22:59.326 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter': no URL paths identified
+2017-10-28 13:22:59.326 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'defaultViewResolver': no URL paths identified
+2017-10-28 13:22:59.326 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'viewResolver': no URL paths identified
+2017-10-28 13:22:59.327 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'welcomePageHandlerMapping': no URL paths identified
+2017-10-28 13:22:59.327 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.327 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'hiddenHttpMethodFilter': no URL paths identified
+2017-10-28 13:22:59.328 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'httpPutFormContentFilter': no URL paths identified
+2017-10-28 13:22:59.328 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.aop.AopAutoConfiguration$JdkDynamicAutoProxyConfiguration': no URL paths identified
+2017-10-28 13:22:59.328 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.aop.config.internalAutoProxyCreator': no URL paths identified
+2017-10-28 13:22:59.328 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.aop.AopAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.329 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.329 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.329 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'validator': no URL paths identified
+2017-10-28 13:22:59.329 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'methodValidationPostProcessor': no URL paths identified
+2017-10-28 13:22:59.330 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.HttpMessageConvertersAutoConfiguration$StringHttpMessageConverterConfiguration': no URL paths identified
+2017-10-28 13:22:59.330 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'stringHttpMessageConverter': no URL paths identified
+2017-10-28 13:22:59.330 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'spring.http.encoding-org.springframework.boot.autoconfigure.web.HttpEncodingProperties': no URL paths identified
+2017-10-28 13:22:59.331 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.JacksonHttpMessageConvertersConfiguration$MappingJackson2HttpMessageConverterConfiguration': no URL paths identified
+2017-10-28 13:22:59.331 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'mappingJackson2HttpMessageConverter': no URL paths identified
+2017-10-28 13:22:59.331 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.JacksonHttpMessageConvertersConfiguration': no URL paths identified
+2017-10-28 13:22:59.331 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.HttpMessageConvertersAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.332 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'messageConverters': no URL paths identified
+2017-10-28 13:22:59.332 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.332 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'spring.info-org.springframework.boot.autoconfigure.info.ProjectInfoProperties': no URL paths identified
+2017-10-28 13:22:59.332 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.HttpEncodingAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.333 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'characterEncodingFilter': no URL paths identified
+2017-10-28 13:22:59.333 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'localeCharsetMappingsCustomizer': no URL paths identified
+2017-10-28 13:22:59.333 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.MultipartAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.334 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'multipartConfigElement': no URL paths identified
+2017-10-28 13:22:59.334 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'multipartResolver': no URL paths identified
+2017-10-28 13:22:59.335 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'spring.http.multipart-org.springframework.boot.autoconfigure.web.MultipartProperties': no URL paths identified
+2017-10-28 13:22:59.335 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.ServerPropertiesAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.335 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'serverProperties': no URL paths identified
+2017-10-28 13:22:59.335 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'duplicateServerPropertiesDetector': no URL paths identified
+2017-10-28 13:22:59.336 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.WebClientAutoConfiguration$RestTemplateConfiguration': no URL paths identified
+2017-10-28 13:22:59.336 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'restTemplateBuilder': no URL paths identified
+2017-10-28 13:22:59.336 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.autoconfigure.web.WebClientAutoConfiguration': no URL paths identified
+2017-10-28 13:22:59.336 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'autoConfigurationReport': no URL paths identified
+2017-10-28 13:22:59.336 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.test.context.filter.TestTypeExcludeFilter': no URL paths identified
+2017-10-28 13:22:59.337 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer$PropertyMappingCheckBeanPostProcessor': no URL paths identified
+2017-10-28 13:22:59.337 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'springApplicationArguments': no URL paths identified
+2017-10-28 13:22:59.337 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'springBootBanner': no URL paths identified
+2017-10-28 13:22:59.337 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'springBootLoggingSystem': no URL paths identified
+2017-10-28 13:22:59.338 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'environment': no URL paths identified
+2017-10-28 13:22:59.338 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'systemProperties': no URL paths identified
+2017-10-28 13:22:59.338 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'systemEnvironment': no URL paths identified
+2017-10-28 13:22:59.338 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'servletContext': no URL paths identified
+2017-10-28 13:22:59.339 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'contextParameters': no URL paths identified
+2017-10-28 13:22:59.339 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'contextAttributes': no URL paths identified
+2017-10-28 13:22:59.339 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.context.annotation.ConfigurationClassPostProcessor.importRegistry': no URL paths identified
+2017-10-28 13:22:59.339 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'org.springframework.boot.test.mock.mockito.MockitoBeans': no URL paths identified
+2017-10-28 13:22:59.339 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'messageSource': no URL paths identified
+2017-10-28 13:22:59.339 DEBUG 17500 --- [    Test worker] o.s.w.s.h.BeanNameUrlHandlerMapping      : Rejected bean name 'applicationEventMulticaster': no URL paths identified
+2017-10-28 13:22:59.386  INFO 17500 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-28 13:22:59.387  INFO 17500 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-28 13:22:59.459 DEBUG 17500 --- [    Test worker] .m.m.a.ExceptionHandlerExceptionResolver : Looking for exception mappings: org.springframework.web.context.support.GenericWebApplicationContext@45a1808a: startup date [Sat Oct 28 13:22:53 CST 2017]; root of context hierarchy
+2017-10-28 13:22:59.531  INFO 17500 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-28 13:22:59.749 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [servletConfigInitParams] PropertySource with lowest search precedence
+2017-10-28 13:22:59.758 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [servletContextInitParams] PropertySource with lowest search precedence
+2017-10-28 13:22:59.773 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [systemProperties] PropertySource with lowest search precedence
+2017-10-28 13:22:59.774 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [systemEnvironment] PropertySource with lowest search precedence
+2017-10-28 13:22:59.779 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Initialized StandardServletEnvironment with PropertySources [servletConfigInitParams,servletContextInitParams,systemProperties,systemEnvironment]
+2017-10-28 13:22:59.853 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [servletConfigInitParams] PropertySource with lowest search precedence
+2017-10-28 13:22:59.855 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [servletContextInitParams] PropertySource with lowest search precedence
+2017-10-28 13:22:59.857 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [systemProperties] PropertySource with lowest search precedence
+2017-10-28 13:22:59.859 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [systemEnvironment] PropertySource with lowest search precedence
+2017-10-28 13:22:59.888 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Initialized StandardServletEnvironment with PropertySources [servletConfigInitParams,servletContextInitParams,systemProperties,systemEnvironment]
+2017-10-28 13:22:59.974 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [servletConfigInitParams] PropertySource with lowest search precedence
+2017-10-28 13:22:59.975 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [servletContextInitParams] PropertySource with lowest search precedence
+2017-10-28 13:22:59.978 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [systemProperties] PropertySource with lowest search precedence
+2017-10-28 13:22:59.980 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Adding [systemEnvironment] PropertySource with lowest search precedence
+2017-10-28 13:22:59.981 DEBUG 17500 --- [    Test worker] o.s.w.c.s.StandardServletEnvironment     : Initialized StandardServletEnvironment with PropertySources [servletConfigInitParams,servletContextInitParams,systemProperties,systemEnvironment]
+2017-10-28 13:23:00.165 DEBUG 17500 --- [    Test worker] o.s.w.c.s.GenericWebApplicationContext   : Unable to locate LifecycleProcessor with name 'lifecycleProcessor': using default [org.springframework.context.support.DefaultLifecycleProcessor@31c2070]
+2017-10-28 13:23:00.175 DEBUG 17500 --- [    Test worker] o.s.w.s.resource.ResourceUrlProvider     : Looking for resource handler mappings
+2017-10-28 13:23:00.177 DEBUG 17500 --- [    Test worker] o.s.w.s.resource.ResourceUrlProvider     : Found resource handler mapping: URL pattern="/**/favicon.ico", locations=[ServletContext resource [/], class path resource [META-INF/resources/], class path resource [resources/], class path resource [static/], class path resource [public/], class path resource []], resolvers=[org.springframework.web.servlet.resource.PathResourceResolver@5767fc97]
+2017-10-28 13:23:00.178 DEBUG 17500 --- [    Test worker] o.s.w.s.resource.ResourceUrlProvider     : Found resource handler mapping: URL pattern="/webjars/**", locations=[class path resource [META-INF/resources/webjars/]], resolvers=[org.springframework.web.servlet.resource.PathResourceResolver@2c1ca236]
+2017-10-28 13:23:00.179 DEBUG 17500 --- [    Test worker] o.s.w.s.resource.ResourceUrlProvider     : Found resource handler mapping: URL pattern="/**", locations=[ServletContext resource [/], class path resource [META-INF/resources/], class path resource [resources/], class path resource [static/], class path resource [public/]], resolvers=[org.springframework.web.servlet.resource.PathResourceResolver@657ee261]
+2017-10-28 13:23:00.195  INFO 17500 --- [    Test worker] org.lyh.myweb.MyServiceTest              : Started MyServiceTest in 8.026 seconds (JVM running for 9.529)
+around advice: A request was issued at execution(public void org.lyh.myweb.service.MyService.test())
+run service.test()
+around advice: A request was issued at execution(public void org.lyh.myweb.service.MessageService.setMsg(java.lang.String))
+around advice: A request was issued at execution(public void org.lyh.myweb.service.MessageService.printMsg())
+test msg: my service 11111
+around advice: A request was issued at execution(public void org.lyh.myweb.service.MyService2.test())
+run service2.test()
+around advice: A request was issued at execution(public void org.lyh.myweb.service.MessageService.printMsg())
+test msg: my service 11111
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
