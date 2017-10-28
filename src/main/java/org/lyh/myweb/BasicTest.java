@@ -10,8 +10,14 @@ package org.lyh.myweb;
 import java.awt.Desktop;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,8 +35,69 @@ import org.lyh.myweb.dto.User;
 public class BasicTest {
 
     public static void main(String[] args) throws Exception {
-        testRunSwingDesktopProgram();
     }
+
+    public static void testFileGenerate() throws Exception {
+
+        List<String> newLineList = new ArrayList<String>();
+        List<String> newLineList2 = new ArrayList<String>();
+
+        FileInputStream fis = new FileInputStream(
+                "C:/ProjectSrc/git/data-share-exchange-2.0/develop/project/gswwEtl-parent/gswwEtl-kettle/kettle-old-lib/app_maven_install.bat");
+        InputStreamReader isr = new InputStreamReader(fis);
+        BufferedReader br = new BufferedReader(isr);
+
+        String line = br.readLine();
+        while (line != null) {
+            if (line.contains("mvn install")) {
+                List<String> lineList = Arrays.asList(line.split(" "));
+                List<String> nameList = Arrays.asList(lineList.get(3).split("="));
+                List<String> groupList = Arrays.asList(nameList.get(1).split("-"));
+                String fileName = nameList.get(1).split(".jar")[0];
+                String groupName = groupList.get(0);
+                line = line.replace("-DgroupId=antlr", "-DgroupId=" + groupName);
+                line = line.replace("-DartifactId=antlr", "-DartifactId=" + fileName);
+                line = line.replace("-Dversion=3.4", "-Dversion=1.0");
+                newLineList.add(line);
+                
+                String depLine = "<dependency><groupId>" + groupName + "</groupId><artifactId>" + fileName + "</artifactId><version>1.0</version></dependency>";
+                newLineList2.add(depLine);
+            }
+            line = br.readLine();
+        }
+        br.close();
+        isr.close();
+        fis.close();
+
+        FileOutputStream fos = new FileOutputStream(
+                "C:/ProjectSrc/git/data-share-exchange-2.0/develop/project/gswwEtl-parent/gswwEtl-kettle/kettle-old-lib/app_maven_install2.bat");
+        OutputStreamWriter osw = new OutputStreamWriter(fos);
+        BufferedWriter bw = new BufferedWriter(osw);
+
+        for (String newLine : newLineList) {
+            bw.write(newLine);
+            bw.newLine();
+        }
+
+        bw.close();
+        osw.close();
+        fos.close();
+
+        FileOutputStream fos2 = new FileOutputStream(
+                "C:/ProjectSrc/git/data-share-exchange-2.0/develop/project/gswwEtl-parent/gswwEtl-kettle/kettle-old-lib/app_maven_dependencies.xml");
+        OutputStreamWriter osw2 = new OutputStreamWriter(fos2);
+        BufferedWriter bw2 = new BufferedWriter(osw2);
+
+        for (String newLine2 : newLineList2) {
+            bw2.write(newLine2);
+            bw2.newLine();
+        }
+
+        bw2.close();
+        osw2.close();
+        fos2.close();
+    }
+    
 
     public static void testRunSwingDesktopProgram() throws IOException, ClassNotFoundException, Exception {
         Robot robot = new Robot();
