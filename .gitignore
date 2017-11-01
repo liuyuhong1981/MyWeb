@@ -1,1 +1,9 @@
+.metadata/*
+.settings/*
+bin/*
+target/*
+webapp/WEB-INF/classes/*
+.classpath
+.project
 /target/
+/.gitignore
