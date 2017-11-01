@@ -10,7 +10,7 @@
 	<groupId>MyWeb</groupId>
 	<artifactId>MyWeb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<repositories>
 		<repository>
@@ -57,6 +57,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
@@ -100,80 +105,16 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-					<compilerArgs>
-						<arg>-verbose</arg>
-						<arg>-Xlint:unchecked</arg>
-						<arg>-Xlint:deprecation</arg>
-						<arg>-bootclasspath</arg>
-						<arg>${env.JAVA_HOME}/jre/lib/rt.jar</arg>
-						<arg>-extdirs</arg>
-						<arg>${project.basedir}/libs</arg>
-					</compilerArgs>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.5</version>
-				<executions>
-					<execution>
-						<id>copy-xmls</id>
-						<phase>process-sources</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/target/libs</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${basedir}/libs</directory>
-									<includes>
-										<include>*.jar</include>
-									</includes>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<outputDirectory>target</outputDirectory>
-					<archive>
-                         <manifest>
-                              <addClasspath>false</addClasspath>
-                              <classpathPrefix>BOOT-INF/classes/;BOOT-INF/lib</classpathPrefix>
-                              <mainClass>org.lyh.myweb.Application</mainClass>
-                         </manifest>
-                    </archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<webResources>
-						<resource>
-							<directory>${project.basedir}/libs</directory>
-							<targetPath>WEB-INF/lib</targetPath>
-							<filtering>true</filtering>
-							<includes>
-								<include>**/*.jar</include>
-							</includes>
-						</resource>
-					</webResources>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<layout>ZIP</layout>
+					<mainClass>org.lyh.myweb.Application</mainClass>
 				</configuration>
 				<executions>
 					<execution>

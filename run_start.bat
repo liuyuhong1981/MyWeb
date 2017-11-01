@@ -1,0 +1,1 @@
+java -jar target\MyWeb-0.0.1-SNAPSHOT.war
