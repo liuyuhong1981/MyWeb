@@ -28,4 +28,9 @@ public class RootController {
 		service.test();
 		return "scroll";
 	}
+
+    @RequestMapping("/hello")
+    public String hello() {
+        return "hello";
+    }
 }
