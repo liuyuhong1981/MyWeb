@@ -7,6 +7,7 @@ import org.lyh.myweb.service.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author liuyuho
@@ -14,20 +15,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class RootController {
-	@Autowired
-	MyService service;
+    @Autowired
+    MyService service;
 
-	@RequestMapping("/")
-	public String index() {
-		service.test();
-		return "index";
-	}
+    @RequestMapping("/")
+    public ModelAndView index() {
+        ModelAndView mv = new ModelAndView();
+        service.test();
+        mv.setViewName("index");
+        return mv;
+    }
 
-	@RequestMapping("/scroll")
-	public String scroll() {
-		service.test();
-		return "scroll";
-	}
+    @RequestMapping("/scroll")
+    public String scroll() {
+        service.test();
+        return "scroll";
+    }
 
     @RequestMapping("/MetaInfoResources")
     public String MetaInfoResources() {
@@ -50,8 +53,10 @@ public class RootController {
     }
 
     @RequestMapping("/resources")
-    public String resources() {
-        return "resources";
+    public ModelAndView resources() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("resources");
+        return mv;
     }
-    
+
 }
