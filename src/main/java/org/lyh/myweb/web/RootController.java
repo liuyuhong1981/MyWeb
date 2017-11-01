@@ -29,8 +29,29 @@ public class RootController {
 		return "scroll";
 	}
 
+    @RequestMapping("/MetaInfoResources")
+    public String MetaInfoResources() {
+        return "MetaInfoResources";
+    }
+
     @RequestMapping("/hello")
     public String hello() {
         return "hello";
     }
+
+    @RequestMapping("/public")
+    public String publicJsp() {
+        return "public";
+    }
+
+    @RequestMapping("/static")
+    public String staticJsp() {
+        return "static";
+    }
+
+    @RequestMapping("/resources")
+    public String resources() {
+        return "resources";
+    }
+    
 }

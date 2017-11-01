@@ -13,14 +13,14 @@ import org.springframework.web.context.request.RequestContextListener;
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
 
-    public static void main(String[] args) {
-//        TestUtil.test();
-        SpringApplication.run(Application.class);
-    }
-
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(Application.class);
+    }
+
+    public static void main(String[] args) {
+//        TestUtil.test();
+        SpringApplication.run(Application.class);
     }
 
     @Bean
