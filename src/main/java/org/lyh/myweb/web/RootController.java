@@ -67,7 +67,9 @@ public class RootController {
     @RequestMapping("/test")
     @ResponseBody
     public String test() {
-        System.out.println("Receve Time: " + Calendar.getInstance().getTime());
+        System.out.println("【Receive Time】: " + Calendar.getInstance().getTime());
+        service.test();
+        System.out.println("Response Time: " + Calendar.getInstance().getTime());
         return "Test OK !!!";
     }
 }

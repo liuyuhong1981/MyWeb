@@ -16,8 +16,13 @@ public class MyService {
     MessageService service;
     
     public void test() {
-        System.out.println("run service.test()");
-        service.setMsg("my service 11111");
-        service.printMsg();
+        try {
+            Thread.sleep(10000l);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//        System.out.println("run service.test()");
+//        service.setMsg("my service 11111");
+//        service.printMsg();
     }
 }
