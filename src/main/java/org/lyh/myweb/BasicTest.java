@@ -30,11 +30,38 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
 
+import org.apache.commons.beanutils.DynaBean;
 import org.lyh.myweb.dto.User;
+
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.JSONUtils;
 
 public class BasicTest {
 
     public static void main(String[] args) throws Exception {
+        testJsonToBean();
+    }
+
+    public static void testJsonToBean() throws Exception {
+        User user = new User();
+        user.setName("aaa");
+        user.setAge(11);
+        JSONObject obj1 = JSONObject.fromObject(user);
+        System.out.println(obj1.toString());
+
+        String jsonStr = "{'age':11,'name':'aaa','have':[{'name':'a1'},{'name':'a2'}]}";
+//        String jsonStr = "{'age':11,'name':'aaa','have':'a2'}";
+        JSONObject obj2 = JSONObject.fromObject(jsonStr);
+        System.out.println(obj2.toString());
+
+//        ObjectMapper mapper = new ObjectMapper();
+//        User user2 = mapper.readValue(obj2.toString(), User.class);
+//        DynaBean dynaBean = JSONUtils.newDynaBean( obj2, new JsonConfig() );
+//        dynaBean.set("have", "a2");
+
+        User user2 = (User) JSONObject.toBean(obj2, User.class);
+        System.out.println(user2.getName());
     }
 
     public static void testFileGenerate() throws Exception {
