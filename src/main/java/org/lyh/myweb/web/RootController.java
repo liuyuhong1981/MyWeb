@@ -67,7 +67,12 @@ public class RootController {
     @ResponseBody
     public String test() {
         System.out.println("【Receive Time】: " + Calendar.getInstance().getTime());
-        testTestServiceByHttp(null);
+        try {
+            Thread.sleep(30000l);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//        testTestServiceByHttp(null);
         System.out.println("Response Time: " + Calendar.getInstance().getTime());
         return "Test OK !!!";
     }
