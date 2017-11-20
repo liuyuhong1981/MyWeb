@@ -3,11 +3,10 @@
  */
 package org.lyh.myweb.web;
 
-import static org.mockito.Mockito.calls;
-
 import java.util.Calendar;
 
 import org.lyh.myweb.service.MyService;
+import org.lyh.myweb.util.HttpURLConnectionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,8 +67,45 @@ public class RootController {
     @ResponseBody
     public String test() {
         System.out.println("【Receive Time】: " + Calendar.getInstance().getTime());
-        service.test();
+        testTestServiceByHttp(null);
         System.out.println("Response Time: " + Calendar.getInstance().getTime());
         return "Test OK !!!";
+    }
+
+    private static void testTestServiceByHttp(String[] args) {
+        String wsUrl = "http://192.168.139.130:7001/test";
+        Integer waitSeconds = 30;
+        if (args != null && args.length == 1) {
+            wsUrl = args[0];
+        } else if (args != null && args.length == 2) {
+            wsUrl = args[0];
+            waitSeconds = Integer.valueOf(args[1]);
+        }
+
+        StringBuffer request = new StringBuffer();
+        request.append(
+                "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ser=\"http://service.test.linglong.plm.dxc.com/\">");
+        request.append(" <soapenv:Header/>");
+        request.append("<soapenv:Body>");
+        request.append("<ser:TestService>");
+        request.append("<TestServiceRequest>");
+
+        request.append("<ID>111</ID>");
+        request.append("<NAME>aaa</NAME>");
+        request.append("<VALUES>");
+        request.append("<VALUE>0001</VALUE>");
+        request.append("<VALUE>0002</VALUE>");
+        request.append("</VALUES>");
+        request.append("<WAITSECONDS>" + waitSeconds + "</WAITSECONDS>");
+
+        request.append("</TestServiceRequest>");
+        request.append(" </ser:TestService>");
+        request.append("</soapenv:Body>");
+        request.append("</soapenv:Envelope>");
+        try {
+            HttpURLConnectionUtil.postRequest(wsUrl, request.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
