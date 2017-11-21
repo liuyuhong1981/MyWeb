@@ -4,11 +4,14 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import org.lyh.myweb.dto.CopyOnWriteJob;
 import org.lyh.myweb.dto.Job;
 import org.lyh.myweb.dto.MyThread;
 import org.lyh.myweb.dto.MyThread2;
+import org.lyh.myweb.dto.TestThreadJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +29,31 @@ public class ThreadTest {
     public static boolean flag = false;
 
     public static void main(String[] args) throws Exception {
-        testConcurrentCollection();
+        testRemoveFromPool();
+    }
+
+    public static void testRemoveFromPool() throws Exception {
+        ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
+        pool.setKeepAliveTime(5, TimeUnit.SECONDS);
+
+        TestThreadJob job1 = new TestThreadJob();
+        job1.setId("1");
+        Thread t1 = new Thread(job1);
+        pool.execute(t1);
+
+        TestThreadJob job2 = new TestThreadJob();
+        job2.setId("2");
+        Thread t2 = new Thread(job2);
+        pool.execute(t2);
+
+        TestThreadJob job3 = new TestThreadJob();
+        job3.setId("3");
+        Thread t3 = new Thread(job3);
+        pool.execute(t3);
+
+        System.out.println(pool.getQueue().size());
+        t1.interrupt();
+        pool.shutdown();
     }
 
     public static void testConcurrentCollection() throws Exception {

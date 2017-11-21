@@ -17,6 +17,8 @@ public class CopyOnWriteJob implements Runnable {
 
     Logger logger = LoggerFactory.getLogger(CopyOnWriteJob.class);
 
+    private String id;
+
     private boolean isFinish;
 
     private CopyOnWriteArrayList<String> list;
@@ -54,6 +56,14 @@ public class CopyOnWriteJob implements Runnable {
 
     public void setList(CopyOnWriteArrayList<String> list) {
         this.list = list;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 }
