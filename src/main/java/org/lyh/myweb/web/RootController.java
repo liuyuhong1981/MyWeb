@@ -5,8 +5,10 @@ package org.lyh.myweb.web;
 
 import java.util.Calendar;
 
+import org.lyh.myweb.service.BaseService;
 import org.lyh.myweb.service.MyService;
 import org.lyh.myweb.util.HttpURLConnectionUtil;
+import org.lyh.myweb.util.SpringContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +45,8 @@ public class RootController {
 
     @RequestMapping("/hello")
     public String hello() {
+        BaseService service = (BaseService) SpringContextUtil.getContext().getBean("TestService222");
+        System.out.println(service.getName());
         return "hello";
     }
 

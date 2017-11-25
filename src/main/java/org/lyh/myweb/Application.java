@@ -19,7 +19,6 @@ public class Application extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) {
-//        TestUtil.test();
         SpringApplication.run(Application.class);
     }
 
