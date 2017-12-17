@@ -27,5 +27,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="libs/poi-3.12-1.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
