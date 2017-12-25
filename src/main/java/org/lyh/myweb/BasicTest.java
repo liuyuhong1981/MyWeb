@@ -30,17 +30,30 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
 
-import org.apache.commons.beanutils.DynaBean;
 import org.lyh.myweb.dto.User;
 
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-import net.sf.json.util.JSONUtils;
 
 public class BasicTest {
 
     public static void main(String[] args) throws Exception {
-        testJsonToBean();
+        System.out.println(getCurrentDateByFormat("MM"));
+    }
+
+    /**
+     * <pre>
+     * 取得指定格式的当前日期
+     * </pre>
+     * @author Liu, Yuhong
+     * @version 1.0
+     * @since 2017年12月6日
+     * @return
+     */
+    private static String getCurrentDateByFormat(String format) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, 1);
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(cal.getTime());
     }
 
     public static void testJsonToBean() throws Exception {
